@@ -1,0 +1,39 @@
+echo
+
+scratch_dir [SCRATCH_DIR=]
+permanent_dir [PERMANENT_DIR=]
+
+start [COMPOUND=]
+
+title "[COMPOUND=]"
+
+memory 7500 mb noverify
+
+geometry units angstrom noautosym nocenter noautoz
+  load [COMPOUND=].xyz
+end
+
+basis "ao basis" spherical print
+   * library 6-31G*
+end
+
+charge [CHARGE=]
+
+dft
+  xc b3lyp
+  mult [MULT=]
+  odft
+  maxiter 500
+  print "final vectors analysis"
+  direct
+  mulliken
+end
+
+driver
+  maxiter 500
+  xyz xyzfiles/[COMPOUND=]
+end
+
+task dft optimize
+
+

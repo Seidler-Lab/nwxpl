@@ -1,0 +1,8 @@
+28
+Starting Geometry Optimization for 105
+Traceback (most recent call last):
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 171, in <module>
+    run_structure(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES)
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 122, in run_structure
+    assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
+AssertionError: NWChem call on geometry optimization step returned exitcode 255!

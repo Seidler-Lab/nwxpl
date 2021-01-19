@@ -1,0 +1,11 @@
+24
+Starting Geometry Optimization for 105
+Starting Ground State Calculation for 105
+Starting XANES calculation for 105
+Starting VTC XES calculation for 105
+Traceback (most recent call last):
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 170, in <module>
+    run_structure(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES)
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 133, in run_structure
+    assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
+AssertionError: NWChem call on xes calculation step returned exitcode 93!

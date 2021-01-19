@@ -1,0 +1,8 @@
+24
+Starting Geometry Optimization for 99058
+checkTraceback (most recent call last):
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 180, in <module>
+    run_structure(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES)
+  File "/gscratch/home/vkashyap/phosforus/nwxpl/ScriptedCalculations/runstructure.py", line 121, in run_structure
+    input('check')
+EOFError: EOF when reading a line
