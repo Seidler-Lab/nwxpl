@@ -1,3 +1,12 @@
 #!/bin/bash
+myPATH=$(grep myPATH .env | cut -d '=' -f2)
+email=$(grep email .env | cut -d '=' -f2)
+mpidest=$(grep mpidest .env | cut -d '=' -f2)
+echo Working directory: $myPATH/
+echo Scratch directory: $myPATH/scratch/
+echo Out directory: ~/phosphorus/out
+echo MPI destination: $mpidest
+echo Email: $email
 module load contrib/python_3.8/3.8
-python nwxpl.py -i $1 -b basisfiles/Pbasis.bas -w ~/phosforus/work/ -s /gscratch/stf/vkashyap -o ~/phosforus/out
+#python modify_settings.py -e $email -p $mpidest
+python nwxpl.py -i 1.list -b basisfiles/Pbasis.bas -w $myPATH/ -s $myPATH/scratch/ -o ~/phosphorus/out

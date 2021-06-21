@@ -1,28 +1,28 @@
 #! /usr/bin/env python
 
-# Run Structures through pipeline linearly
-# Creates one job per structure
-# To see more options use '-h' flag 
+""""
+Run Structures through pipeline linearly.
+Creates one job per structure.
+To see more options use '-h' flag.
+"""
 
-import subprocess
-import os
 import argparse
 import sys
-import pathlib
 from pathlib import Path
 
-from runstructure import setup_job_filestructure
-from nwxutils import *
+from nwxutils import start_batch_job
+from setup_filestructure import setup_job_filestructure
+
 
 # Setup and start a job for a structure
 # Arguments are Path objects
 def run_structure(structfilename, basisfilename, workdir, scratchdir, outdir):
 	compoundname = structfilename.stem
-	print("Setting up for {}".format(compoundname))
+	print("\nSetting up for {}".format(compoundname))
 	setup_job_filestructure(structfilename, basisfilename, workdir, scratchdir, outdir)
 	print("Starting job for {}".format(compoundname))
-	start_batch_job(str(workdir/compoundname/'job.run'))
-	
+	start_batch_job(str(workdir/compoundname/'job.run'))  # from nwxutils.py
+
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser( \
@@ -49,15 +49,12 @@ if __name__ == '__main__':
 	if (BASIS_FILENAME is not None and not BASIS_FILENAME.exists()):
 		print("Can't read basis file")
 		sys.exit(1)
-
-	# Read list file and run each structure
+	
 	try:	
-		with LIST_FILENAME.open('r') as f:
+		with open(LIST_FILENAME, 'r') as f:
 			for line in f:
 				structfilename = Path(line.strip())
 				run_structure(structfilename, BASIS_FILENAME, WORK_DIR, SCRATCH_DIR, OUT_DIR)
 	except:
-		print("Unable to open structure list file")
+		print("Unable to open structure list file: {}".format(LIST_FILENAME))
 		sys.exit(1)
-
-
