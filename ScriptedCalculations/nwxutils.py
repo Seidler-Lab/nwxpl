@@ -200,7 +200,7 @@ def check_for_heavy_atoms(infile):
     heavy_atoms = []
     with open(infile, 'r') as f:
         data = f.read()
-    check_these_atoms = ['Br', 'Cl']
+    check_these_atoms = ['Br', 'Cl', 'S', 'I']
     for atom in check_these_atoms:
         if atom in data:
             heavy_atoms.append(atom)
