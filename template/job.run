@@ -7,15 +7,13 @@
 #SBATCH --time=[TIME=10:00:00]
 #SBATCH --mem=[MEMORY=50G]
 #SBATCH --output=[WORK_DIR=]/slurm-cid-[COMPOUND_NAME=].out
-## Adding email
+## EMAIL OPT
 #SBATCH --mail-type=END
 #SBATCH --mail-user=stetef@uw.edu
 source /etc/profile.d/modules.csh
 module purge
 module load contrib/python_3.8/3.8
 module load contrib/NWChem
-#module load contrib/openmpi/3.0.0
-#module load contrib/gcc/6.2.0_mpich-3.2
 setenv ARMCI_DEFAULT_SHMMAX 32768
 setenv NWCHEM_BASIS_LIBRARY "/sw/contrib/NWChem/nwchem-6.6/src/basis/libraries/"
 setenv NWCHEM_NWPW_LIBRARY "/sw/contrib/NWChem/nwchem-6.6/src/nwpw/libraryps/"

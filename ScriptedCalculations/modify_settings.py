@@ -2,9 +2,6 @@
 
 import re
 import argparse
-from pathlib import Path
-
-from nwxutils import replace_text_in_file
 
 
 def add_email_to_job_template(email):
@@ -14,11 +11,20 @@ def add_email_to_job_template(email):
     with open(jobfile, 'r') as f:
         filedata = f.read()
 
-    filedata = re.sub("EMAIL OPT",
-                      ("Adding email\n"
-                       "#SBATCH --mail-type=END\n"
-                       "#SBATCH --mail-user={}".format(email)),
-                      filedata)
+    if email is None:
+        # no email notification
+        filedata = re.sub(("EMAIL OPT\n"
+                           "#SBATCH --mail-type=END\n"
+                           "#SBATCH --mail-user=.+?\n"),
+                          "EMAIL: None\n",
+                          filedata)
+    else:
+        # yes email notification
+        filedata = re.sub("EMAIL: None\n",
+                          ("EMAIL OPT\n"
+                           "#SBATCH --mail-type=END\n"
+                           "#SBATCH --mail-user={}\n".format(email)),
+                          filedata)
 
     with open(jobfile, 'w') as f:
         f.write(filedata)
@@ -27,7 +33,7 @@ def add_email_to_job_template(email):
 
 def modify_mpipath(mpidest):
     """
-    Adds the appripriate path to the two locations.
+    Add the appripriate path to the two locations.
 
     The mpi path is specified in the job.run file and in nwxpl.
     This functions changes the job file in the template direcotry
@@ -35,10 +41,32 @@ def modify_mpipath(mpidest):
     """
     # job file modification
     jobfile = '../template/job.run'
-    replace_text_in_file(jobfile, [('mpidest', mpidest)])
+    keyword = 'LD_LIBRARY_PATH ".+?/mpich-3.2/lib"'
+
+    with open(jobfile, 'r') as f:
+        filedata = f.read()
+
+    filedata = re.sub(keyword,
+                      'LD_LIBRARY_PATH "{}/mpich-3.2/lib"'.format(mpidest),
+                      filedata)
+
+    with open(jobfile, 'w') as f:
+        f.write(filedata)
+
     # nwxutils file modification
     utilsfile = 'nwxutils.py'
-    replace_text_in_file(utilsfile, [('mpidest', mpidest)])
+    keyword = "'.+?/mpich-3.2"
+
+    with open(utilsfile, 'r') as f:
+        filedata = f.read()
+
+    filedata = re.sub(keyword,
+                      "'{}/mpich-3.2".format(mpidest),
+                      filedata)
+
+    with open(utilsfile, 'w') as f:
+        f.write(filedata)
+
     return
 
 
@@ -60,9 +88,12 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    mpidest = str(Path(args.mpidest).resolve())
+    # mpidest = str(Path(args.mpidest).resolve())
+    mpidest = args.mpidest
 
-    if not args.email == "email":
+    if args.email == "email":
+        add_email_to_job_template(None)
+    else:
         add_email_to_job_template(args.email)
 
     modify_mpipath(mpidest)
