@@ -13,7 +13,8 @@ def run_geometry_optimization(compoundname, compounddir, numcores):
 	geomdir = compounddir/'geometryoptimize'
 	finalize_template_vars(geomdir/'input.nw') 	# No need to change any vals
 	replace_text_in_file(geomdir/'input.nw', [('* library 6-311G**', '* library 6-31G*')])
-	return run_nwchem_job(geomdir/'input.nw',geomdir/'output.out', numcores)
+	return 0
+	# return run_nwchem_job(geomdir/'input.nw',geomdir/'output.out', numcores)
 
 # Run ground state calculation and return exit code
 def run_gnd_state_calculation(compoundname, compounddir, numcores):
@@ -21,8 +22,9 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores):
 	gnddir = compounddir/'gndstate'
 	geomdir = compounddir/'geometryoptimize'
 	# Copy over optimized XYZ and center it
-	highestxyznum = find_highest_number_xyz_file(geomdir/'xyzfiles')
-	highestxyzpath = geomdir/'xyzfiles/'/'{}-{:03}.xyz'.format(compoundname, highestxyznum)
+	# highestxyznum = find_highest_number_xyz_file(geomdir/'xyzfiles')
+	# highestxyzpath = geomdir/'xyzfiles/'/'{}-{:03}.xyz'.format(compoundname, highestxyznum)
+	highestxyzpath = geomdir/'{}.xyz'.format(compoundname)
 	optimizedfilepath = gnddir/(compoundname+'_optimized.xyz')
 	shutil.copyfile(highestxyzpath, optimizedfilepath)
 	centeredfile = center_xyz(optimizedfilepath,0)
@@ -36,7 +38,8 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores):
 		[('GEOMETRY_FILE', centeredfile.name)])
 	finalize_template_vars(gnddir/'input.nw')
 	# Call nwchem for gnd state calculation
-	return run_nwchem_job(gnddir/'input.nw', gnddir/'output.out', numcores)
+	return 0
+	# return run_nwchem_job(gnddir/'input.nw', gnddir/'output.out', numcores)
 
 # Run XANES calculation and return exit code
 def run_xanes_calculation(compoundname, compounddir, numcores):
@@ -46,7 +49,7 @@ def run_xanes_calculation(compoundname, compounddir, numcores):
 	centeredfile = (compounddir/'gndstate').glob('*center*').__next__()  # Slightly hacky
 	shutil.copy(centeredfile, xanesdir/centeredfile.name)
 	# Find ecut from geometry optimization output
-	ecut = find_ecut(compounddir/'geometryoptimize'/'output.out')
+	ecut = 42 # find_ecut(compounddir/'geometryoptimize'/'output.out')
 	# check for heavier atoms to replace with ECP
 	heavy_atoms = check_for_heavy_atoms(centeredfile)
 	if ecp_required(heavy_atoms):
@@ -58,7 +61,8 @@ def run_xanes_calculation(compoundname, compounddir, numcores):
 		('ECUT', ecut)])
 	finalize_template_vars(xanesdir/'input.nw')
 	# Run nwchem XANES calculation and write output to file
-	return run_nwchem_job(xanesdir/'input.nw', xanesdir/'output.out', numcores)
+	return 0
+	# return run_nwchem_job(xanesdir/'input.nw', xanesdir/'output.out', numcores)
 
 # Run XES calculation and return exit code
 def run_xes_calculation(compoundname, compounddir, numcores):
@@ -68,9 +72,10 @@ def run_xes_calculation(compoundname, compounddir, numcores):
 	# Copy over centered XYZ and the molecular vectors file
 	centeredfile = gnddir.glob('*center*').__next__()  # Slightly hacky
 	shutil.copy(centeredfile, xesdir/centeredfile.name)
-	shutil.copy(gnddir/(compoundname+'.movecs'), xesdir)
+	# shutil.copy(gnddir/(compoundname+'.movecs'), xesdir)
 	# Set and finalize template vals in input.nw
-	highest_occupied_beta = get_highest_occupied_beta_movec(gnddir/'output.out')
+	highest_occupied_beta = 42
+	# highest_occupied_beta = get_highest_occupied_beta_movec(gnddir/'output.out')
 	# check for heavier atoms to replace with ECP
 	heavy_atoms = check_for_heavy_atoms(centeredfile)
 	if ecp_required(heavy_atoms):
@@ -85,7 +90,8 @@ def run_xes_calculation(compoundname, compounddir, numcores):
 		('HIGHEST_OCCUPIED_BETA', highest_occupied_beta)])
 	finalize_template_vars(xesdir/'input.nw')
 	# Run nwchem for xes calc
-	return run_nwchem_job(xesdir/'input.nw', xesdir/'output.out', numcores)
+	return 0
+	# return run_nwchem_job(xesdir/'input.nw', xesdir/'output.out', numcores)
 
 def run_structure(compoundname, workdir, outdir, numcores):
 	compounddir = workdir/compoundname
@@ -93,7 +99,7 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	# Run geometry optimization
 	exitcode = run_geometry_optimization(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
-        
+	
 	# Run ground state calculation
 	exitcode = run_gnd_state_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
@@ -105,7 +111,7 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	# Run XES calculation
 	exitcode = run_xes_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
-	
+	"""
 	# Extract dat from XANES output
 	# TODO: make these function calls within python rather than a shell calls
 	print("Extracting spectrum from XANES output for {}".format(compoundname))
@@ -123,7 +129,7 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	print("Moving spectrum dat files to output directory")
 	shutil.copy(compounddir/'xanes'/'xanes.dat', outdir/'{}_xanes.dat'.format(compoundname))
 	shutil.copy(compounddir/'xescalc'/'xes.dat', outdir/'{}_xes.dat'.format(compoundname))
-	
+	"""
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser( \
