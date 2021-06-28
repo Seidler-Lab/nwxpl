@@ -31,26 +31,9 @@ def setup_job_filestructure(structfilename, basisfilename, workdir,
     # Make calculation dir and move files into it
     if compounddir.exists():
         print("Found existing directory. Deleting.") 
-        """
-        for root, dirs, files in os.walk(compounddir):
-            for d in dirs:
-                os.chmod(os.path.join(root, d), 777)
-            for f in files:
-                os.chmod(os.path.join(root, f), 777) 
-        """
         shutil.rmtree(compounddir)  # Remove dir and replace if already exists
     shutil.copytree(PL_ROOT/'template', compounddir)  # Copy template dirs
-    shutil.copy(structfilename, compounddir/'geometryoptimize')    # Copy XYZ
-    """ 
-    # Change permissions to allow read/write/execute
-    for root, dirs, files in os.walk(compounddir):
-        for d in dirs:
-            os.chmod(os.path.join(root, d), 777)
-        for f in files:
-            os.chmod(os.path.join(root, f), 777)
-    
-    """
-    subprocess.run(['chmod', '777', compounddir/'geometryoptimize/'])
+    shutil.copy(structfilename, compounddir/'geometryoptimize/')    # Copy XYZ
 
     # Get initial multiplicity
     mult = basic_multiplicity_from_atoms(read_xyz(structfilename))
@@ -61,7 +44,7 @@ def setup_job_filestructure(structfilename, basisfilename, workdir,
         set_template_vars(compounddir/nwchemstage/'input.nw',
             [('COMPOUND', compoundname),
             ('SCRATCH_DIR', scratchdir),
-            # ('PERMANENT_DIR', str(workdir/compoundname)),
+            #('PERMANENT_DIR', str(workdir/compoundname)),
             # ('BASIS_DATA', basisdata),
             ('CHARGE', charge),
             ('MULT', mult)])

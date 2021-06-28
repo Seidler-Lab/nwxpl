@@ -95,7 +95,7 @@ end
 
 tddft
 	ecut [ECUT=]
-	nroots 100
+	nroots 50
 	notriplet
 end
 task tddft

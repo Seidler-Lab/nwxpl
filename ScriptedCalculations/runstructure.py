@@ -93,7 +93,7 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	# Run geometry optimization
 	exitcode = run_geometry_optimization(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
-	"""
+        
 	# Run ground state calculation
 	exitcode = run_gnd_state_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
@@ -123,7 +123,7 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	print("Moving spectrum dat files to output directory")
 	shutil.copy(compounddir/'xanes'/'xanes.dat', outdir/'{}_xanes.dat'.format(compoundname))
 	shutil.copy(compounddir/'xescalc'/'xes.dat', outdir/'{}_xes.dat'.format(compoundname))
-	"""
+	
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser( \

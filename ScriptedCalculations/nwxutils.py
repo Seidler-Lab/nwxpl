@@ -185,7 +185,7 @@ def get_highest_occupied_beta_movec(infile):
     """Retrieve highest occupied beta movec from groundstate calc output."""
     with open(infile, 'r') as f:
         content = f.read()
-        borbitalsindex = content.index('DFT Final Beta Molc Orbital Analysis')
+        borbitalsindex = content.index('DFT Final Beta Molecular Orbital Analysis')
         betaorbitals = content[borbitalsindex:]
         occ0index = betaorbitals.index('Occ=0')
         f.seek(borbitalsindex + occ0index)
@@ -200,7 +200,7 @@ def check_for_heavy_atoms(infile):
     heavy_atoms = []
     with open(infile, 'r') as f:
         data = f.read()
-    check_these_atoms = ['Br', 'Cl']
+    check_these_atoms = ['Br', 'Cl', 'S', 'I']
     for atom in check_these_atoms:
         if atom in data:
             heavy_atoms.append(atom)
@@ -213,7 +213,7 @@ def ecp_required(heavy_atoms):
     return not isempty
 
 
-def add_ecp(infile, heavy_atoms, ecp="Stuttgart RLC ECP"):
+def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
     """Add ECP to input file for the specified heavy atoms."""
     # add except for heavy atoms for basis
     ecp_template = "HEAVYATOM library {}".format(ecp)
