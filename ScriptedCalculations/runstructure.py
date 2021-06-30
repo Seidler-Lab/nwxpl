@@ -22,7 +22,7 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores):
 	geomdir = compounddir/'geometryoptimize'
 	# Copy over optimized XYZ and center it
 	highestxyznum = find_highest_number_xyz_file(geomdir/'xyzfiles')
-	highestxyzpath = geomdir/'xyzfiles/'/'{}-{:03}.xyz'.format(compoundname, highestxyznum)
+	highestxyzpath = geomdir/'xyzfiles'/'{}-{:03}.xyz'.format(compoundname, highestxyznum)
 	optimizedfilepath = gnddir/(compoundname+'_optimized.xyz')
 	shutil.copyfile(highestxyzpath, optimizedfilepath)
 	centeredfile = center_xyz(optimizedfilepath,0)
@@ -46,7 +46,7 @@ def run_xanes_calculation(compoundname, compounddir, numcores):
 	centeredfile = (compounddir/'gndstate').glob('*center*').__next__()  # Slightly hacky
 	shutil.copy(centeredfile, xanesdir/centeredfile.name)
 	# Find ecut from geometry optimization output
-	ecut = find_ecut(compounddir/'geometryoptimize'/'output.out')
+	ecut = find_ecut(compounddir/'gndstate'/'output.out')
 	# check for heavier atoms to replace with ECP
 	heavy_atoms = check_for_heavy_atoms(centeredfile)
 	if ecp_required(heavy_atoms):
@@ -89,7 +89,7 @@ def run_xes_calculation(compoundname, compounddir, numcores):
 
 def run_structure(compoundname, workdir, outdir, numcores):
 	compounddir = workdir/compoundname
-	
+		
 	# Run geometry optimization
 	exitcode = run_geometry_optimization(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
@@ -97,11 +97,11 @@ def run_structure(compoundname, workdir, outdir, numcores):
 	# Run ground state calculation
 	exitcode = run_gnd_state_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
-
+		
 	# Run XANES calculation
 	exitcode = run_xanes_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xanes calculation step returned exitcode {}!".format(exitcode)
-
+	
 	# Run XES calculation
 	exitcode = run_xes_calculation(compoundname, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
