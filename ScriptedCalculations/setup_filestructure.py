@@ -1,7 +1,5 @@
 """
-Useful functions for use in pipeline scripts.
-
-Written by Vikram Kashyap 2021
+Setup directory in order to run job. Copies and fills out templates
 """
 
 import shutil, os, subprocess
@@ -10,7 +8,7 @@ from pathlib import Path
 from nwxutils import *
 
 
-def setup_job_filestructure(structfilename, basisfilename, workdir,
+def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
                             scratchdir, outdir, charge=0):
     """
     Set up filestructure in working dir before job is started.
@@ -49,6 +47,8 @@ def setup_job_filestructure(structfilename, basisfilename, workdir,
             ('CHARGE', charge),
             ('MULT', mult)])
 
+    print(repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib')))
+
     # Set template vars in job file and finalize
     # Note path strings are put through repr to add quotes, guarding spaces
     current_file_path = str(Path(__file__).resolve())
@@ -58,7 +58,9 @@ def setup_job_filestructure(structfilename, basisfilename, workdir,
         ('PIPELINE_SCRIPT', repr(pipeline_Script)),
         ('COMPOUND_NAME', compoundname),
         ('WORK_DIR', repr(str(workdir))),
-        ('OUT_DIR', repr(str(outdir)))])
+        ('OUT_DIR', repr(str(outdir))),
+        ('MPI_PATH', repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib'))),
+        ('EMAIL', env_config['NWXPL_EMAIL'])])
     finalize_template_vars(compounddir/'job.run')
 
     # print("Filesctructure setup for {}".format(compoundname))

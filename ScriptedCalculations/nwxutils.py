@@ -1,18 +1,27 @@
 """
 Useful functions for use in pipeline scripts.
-
-Written by Vikram Kashyap 2021
 """
 
 import re
 import subprocess
 from subprocess import run
 import warnings
+from pathlib import Path
 
+def parse_env(envpath):
+	with Path(envpath).open() as f:
+		data = f.readlines()
+	env=dict()
+	for line in data:
+		if line.startswith('#') or not line.strip(): continue	#Ignore comments & blanks
+		pair = line.split('=')
+		env[pair[0].strip()] = pair[1].strip()
+	return env
 
-def run_nwchem_job(jobfile, outfile, cores):
+def run_nwchem_job(jobfile, env_config, outfile, cores):
     """Run an nwchem job, write output to file, and return errorcode."""
-    completedjob = run(['/gscratch/home/stetef/mpich-3.2/bin/mpirun', '-n', str(cores),
+    completedjob = run([str((Path(env_config['NWXPL_MPI_PATH'])/'bin'/'mpirun').resolve()),
+                        '-n', str(cores),
                         'nwchem', str(jobfile.name)],
                        cwd=jobfile.parent,
                        capture_output=True)
