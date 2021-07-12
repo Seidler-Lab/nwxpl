@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=[CORES=28]
 #SBATCH --time=[TIME=10:00:00]
-#SBATCH --mem=[MEMORY=50G]
+#SBATCH --mem=[MEMORY=100G]
 #SBATCH --output=[WORK_DIR=]/[COMPOUND_NAME=]/slurm-job.out
 ##SBATCH --mail-type=END,FAIL
 ##SBATCH --mail-user=[EMAIL=]	
