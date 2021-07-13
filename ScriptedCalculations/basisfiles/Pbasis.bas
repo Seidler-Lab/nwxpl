@@ -73,4 +73,5 @@ end
 ecp
   S library "Stuttgart RLC ECP"
   Cl library "Stuttgart RLC ECP"
+  I library "Stuttgart RLC ECP"
 end

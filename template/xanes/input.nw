@@ -83,19 +83,15 @@ P    G
          0.3676200     0.5269469
 end
 
-
 charge [CHARGE=]
 
 dft
   xc pbe0
-  #mult [MULT=]
-  #odft
   print "final vectors analysis"
   maxiter 500
   mulliken
   direct
 end
-#task dft
 
 tddft
 	ecut [ECUT=]
