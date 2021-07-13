@@ -8,15 +8,15 @@ from nwxutils import *
 
 
 # Run geometry optimize step and return exit code
-def run_geometry_optimization(compoundname, compounddir, numcores):
+def run_geometry_optimization(compoundname, env_config, compounddir, numcores):
 	print("Starting Geometry Optimization for {}".format(compoundname))
 	geomdir = compounddir/'geometryoptimize'
 	finalize_template_vars(geomdir/'input.nw') 	# No need to change any vals
 	replace_text_in_file(geomdir/'input.nw', [('* library 6-311G**', '* library 6-31G*')])
-	return run_nwchem_job(geomdir/'input.nw',geomdir/'output.out', numcores)
+	return run_nwchem_job(geomdir/'input.nw', env_config, geomdir/'output.out', numcores)
 
 # Run ground state calculation and return exit code
-def run_gnd_state_calculation(compoundname, compounddir, numcores):
+def run_gnd_state_calculation(compoundname, env_config, compounddir, numcores):
 	print("Starting Ground State Calculation for {}".format(compoundname))
 	gnddir = compounddir/'gndstate'
 	geomdir = compounddir/'geometryoptimize'
@@ -36,10 +36,10 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores):
 		[('GEOMETRY_FILE', centeredfile.name)])
 	finalize_template_vars(gnddir/'input.nw')
 	# Call nwchem for gnd state calculation
-	return run_nwchem_job(gnddir/'input.nw', gnddir/'output.out', numcores)
+	return run_nwchem_job(gnddir/'input.nw', env_config, gnddir/'output.out', numcores)
 
 # Run XANES calculation and return exit code
-def run_xanes_calculation(compoundname, compounddir, numcores):
+def run_xanes_calculation(compoundname, env_config, compounddir, numcores):
 	print("Starting XANES calculation for {}".format(compoundname))
 	xanesdir = compounddir/'xanes'
 	# Copy over centered XYZ
@@ -58,10 +58,10 @@ def run_xanes_calculation(compoundname, compounddir, numcores):
 		('ECUT', ecut)])
 	finalize_template_vars(xanesdir/'input.nw')
 	# Run nwchem XANES calculation and write output to file
-	return run_nwchem_job(xanesdir/'input.nw', xanesdir/'output.out', numcores)
+	return run_nwchem_job(xanesdir/'input.nw', env_config, xanesdir/'output.out', numcores)
 
 # Run XES calculation and return exit code
-def run_xes_calculation(compoundname, compounddir, numcores):
+def run_xes_calculation(compoundname, env_config, compounddir, numcores):
 	print("Starting VTC XES calculation for {}".format(compoundname))
 	xesdir = compounddir/'xescalc'
 	gnddir = compounddir/'gndstate'
@@ -77,7 +77,7 @@ def run_xes_calculation(compoundname, compounddir, numcores):
 		# replace heavier atoms with ECP
 		add_ecp(xesdir/'input.nw', heavy_atoms)
 	# Increase charge by 1
-	charge = int(get_template_var(xesdir/'input.nw', 'CHARGE'))+1
+	charge = int(get_template_var(xesdir/'input.nw', 'charge'))+1
 	set_template_vars(xesdir/'input.nw',
 		[('GEOMETRY_FILE', centeredfile.name),
 		('CHARGE', charge),
@@ -85,25 +85,25 @@ def run_xes_calculation(compoundname, compounddir, numcores):
 		('HIGHEST_OCCUPIED_BETA', highest_occupied_beta)])
 	finalize_template_vars(xesdir/'input.nw')
 	# Run nwchem for xes calc
-	return run_nwchem_job(xesdir/'input.nw', xesdir/'output.out', numcores)
+	return run_nwchem_job(xesdir/'input.nw', env_config, xesdir/'output.out', numcores)
 
-def run_structure(compoundname, workdir, outdir, numcores):
+def run_structure(compoundname, env_config, workdir, outdir, numcores):
 	compounddir = workdir/compoundname
 		
 	# Run geometry optimization
-	exitcode = run_geometry_optimization(compoundname, compounddir, numcores)
+	exitcode = run_geometry_optimization(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
         
 	# Run ground state calculation
-	exitcode = run_gnd_state_calculation(compoundname, compounddir, numcores)
+	exitcode = run_gnd_state_calculation(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
 		
 	# Run XANES calculation
-	exitcode = run_xanes_calculation(compoundname, compounddir, numcores)
+	exitcode = run_xanes_calculation(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xanes calculation step returned exitcode {}!".format(exitcode)
 	
 	# Run XES calculation
-	exitcode = run_xes_calculation(compoundname, compounddir, numcores)
+	exitcode = run_xes_calculation(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
 	
 	# Extract dat from XANES output
@@ -139,4 +139,6 @@ if __name__ == '__main__':
 	OUT_DIR = Path(args.outdir).resolve()
 	CORES = args.cores
 
-	run_structure(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES)
+	ENV_CONFIG = parse_env(".env")
+
+	run_structure(COMPOUND_NAME, ENV_CONFIG, WORK_DIR, OUT_DIR, CORES)

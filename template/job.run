@@ -5,11 +5,10 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=[CORES=28]
 #SBATCH --time=[TIME=10:00:00]
-#SBATCH --mem=[MEMORY=50G]
-#SBATCH --output=[WORK_DIR=]/slurm-cid-[COMPOUND_NAME=].out
-## EMAIL OPT
-#SBATCH --mail-type=END
-#SBATCH --mail-user=stetef@uw.edu
+#SBATCH --mem=[MEMORY=100G]
+#SBATCH --output=[WORK_DIR=]/[COMPOUND_NAME=]/slurm-job.out
+##SBATCH --mail-type=END,FAIL
+##SBATCH --mail-user=[EMAIL=]	
 source /etc/profile.d/modules.csh
 module purge
 module load contrib/python_3.8/3.8
@@ -23,7 +22,7 @@ setenv MKL_NUM_THREADS 1
 setenv NWC_RANKS_PER_DEVICE 0
 setenv OFFLOAD_INIT on_offload
 setenv MPIRETURN 999
-setenv LD_LIBRARY_PATH "/gscratch/home/stetef/mpich-3.2/lib"
+setenv LD_LIBRARY_PATH [MPI_PATH=]
 python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28]
 setenv MPIRETURN $?
 
