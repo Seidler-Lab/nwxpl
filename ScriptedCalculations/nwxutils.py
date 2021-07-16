@@ -225,15 +225,29 @@ def ecp_required(heavy_atoms):
 def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
     """Add ECP to input file for the specified heavy atoms."""
     # add except for heavy atoms for basis
-    ecp_template = "HEAVYATOM library {}".format(ecp)
-    ecp_block_template = 'ecp\n  {}\nend\n'.format(ecp_template)
+    # ecp_template = "HEAVYATOM library {}".format(ecp)
+
     with open(infile, 'r') as f:
         filedata = f.read()
+
+    # add exception line
     filedata = re.sub("except P",
-                      "except P HEAVYATOM\n{}".format(ecp_template), filedata)
+                      "except P {}".format(' '.join(heavy_atoms)),
+                      filedata)
+
+    # add basis library substitution
+    for atom in heavy_atoms:
+        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom, ecp), filedata)
+
+    # add ecp block
+    ecp_block_template = 'ecp\nend\n'
     filedata = re.sub("charge",
                       '{}\ncharge'.format(ecp_block_template), filedata)
-    filedata = re.sub("HEAVYATOM", ' '.join(heavy_atoms), filedata)
+
+    # make ECP block sub here
+    for atom in heavy_atoms:
+        filedata = re.sub("ecp", "ecp\n  {} library {}".format(atom, ecp), filedata)
+
     with open(infile, 'w') as f:
         f.write(filedata)
     return
