@@ -10,4 +10,4 @@ echo Out directory: $out
 echo MPI destination: $mpidest
 echo Email: $email
 module load contrib/python_3.8/3.8
-python nwxpl.py -i 1.list -b basisfiles/Pbasis.bas -w $work -s $scratch -o $out
+python nwxpl.py -i 3.list -b basisfiles/Pbasis.bas -w $work -s $scratch -o $out

@@ -77,7 +77,7 @@ def run_xes_calculation(compoundname, env_config, compounddir, numcores):
 		# replace heavier atoms with ECP
 		add_ecp(xesdir/'input.nw', heavy_atoms)
 	# Increase charge by 1
-	charge = int(get_template_var(xesdir/'input.nw', 'charge'))+1
+	charge = int(get_template_var(xesdir/'input.nw', 'CHARGE'))+1
 	set_template_vars(xesdir/'input.nw',
 		[('GEOMETRY_FILE', centeredfile.name),
 		('CHARGE', charge),

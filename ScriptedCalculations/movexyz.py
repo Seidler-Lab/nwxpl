@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     workdir = '/gscratch/stf/stetef/work/'
     inputdir = '/usr/lusers/stetef/phosphorus/nwxpl/ScriptedCalculations/input_xyz/'
-    listname = '1.list'
+    listname = '3.list'
 
     WORK_DIR = Path(workdir).resolve()
     OUT_DIR = Path(outdir).resolve()
