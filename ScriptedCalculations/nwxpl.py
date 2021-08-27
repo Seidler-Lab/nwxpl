@@ -16,8 +16,8 @@ from pathlib import Path
 # Arguments are Path objects
 def run_structure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir):
 	compoundname = structfilename.stem
-	print("\nSetting up for {}".format(compoundname))
-	setup_job_filestructure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir)
+	#print("\nSetting up for {}".format(compoundname))
+	#setup_job_filestructure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir)
 	print("Starting job for {}".format(compoundname))
 	start_batch_job(str(workdir/compoundname/'job.run'))  # from nwxutils.py
 

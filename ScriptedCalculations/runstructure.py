@@ -89,7 +89,7 @@ def run_xes_calculation(compoundname, env_config, compounddir, numcores):
 
 def run_structure(compoundname, env_config, workdir, outdir, numcores):
 	compounddir = workdir/compoundname
-		
+	"""		
 	# Run geometry optimization
 	exitcode = run_geometry_optimization(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
@@ -97,7 +97,7 @@ def run_structure(compoundname, env_config, workdir, outdir, numcores):
 	# Run ground state calculation
 	exitcode = run_gnd_state_calculation(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
-		
+	"""		
 	# Run XANES calculation
 	exitcode = run_xanes_calculation(compoundname, env_config, compounddir, numcores)
 	assert exitcode == 0, "NWChem call on xanes calculation step returned exitcode {}!".format(exitcode)
