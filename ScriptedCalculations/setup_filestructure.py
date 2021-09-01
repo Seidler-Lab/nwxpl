@@ -95,4 +95,4 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     # Set template vars in input file
     set_template_vars(compounddir/'esp'/'input.nw',
         [('COMPOUND', compoundname),
-         ('SCRATCH_DIR', scratchdir)]
+         ('SCRATCH_DIR', scratchdir)])
