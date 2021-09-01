@@ -64,3 +64,26 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     finalize_template_vars(compounddir/'job.run')
 
     # print("Filesctructure setup for {}".format(compoundname))
+
+
+def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
+                            scratchdir, outdir, charge=0):
+    """
+    Set up esp filestructure in working dir before job is started.
+
+    Paths passed to setup must be absolute.
+    """
+    # Root dir of pipeline filestructure (should this be passed?)
+    PL_ROOT = Path(__file__).parents[1]
+
+    compoundname = structfilename.stem
+    structbasename = structfilename.name
+    compounddir = workdir/compoundname
+
+    # Make esp dir
+    shutil.copytree(PL_ROOT/'template'/'esp', compounddir)
+
+    # Set template vars in input file
+    set_template_vars(compounddir/'esp'/'input.nw',
+        [('COMPOUND', compoundname),
+         ('SCRATCH_DIR', scratchdir)]

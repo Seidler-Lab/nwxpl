@@ -9,15 +9,16 @@ To see more options use '-h' flag.
 import argparse
 import sys
 from nwxutils import parse_env, start_batch_job
-from setup_filestructure import setup_job_filestructure
+from setup_filestructure import setup_job_filestructure, setup_esp_filestructure
 from pathlib import Path
 
 # Setup and start a job for a structure
 # Arguments are Path objects
 def run_structure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir):
 	compoundname = structfilename.stem
-	#print("\nSetting up for {}".format(compoundname))
+	print("\nSetting up for {}".format(compoundname))
 	#setup_job_filestructure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir)
+	setup_esp_filestructure(structfilename, env_config, basisfilename, workdir, scratchdir, outdir)
 	print("Starting job for {}".format(compoundname))
 	start_batch_job(str(workdir/compoundname/'job.run'))  # from nwxutils.py
 
