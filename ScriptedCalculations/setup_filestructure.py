@@ -81,7 +81,7 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     compounddir = workdir/compoundname
 
     # Make esp dir
-    os.mkdirs(compounddir/'esp')
+    os.mkdir(compounddir/'esp')
     shutil.copy(PL_ROOT/'template'/'esp'/'input.nw', compounddir/'esp')
 
     # Set template vars in input file
