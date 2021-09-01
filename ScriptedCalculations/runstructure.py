@@ -132,7 +132,8 @@ def run_esp(compoundname, env_config, workdir, outdir, numcores):
     gnddir = compounddir/'gndstate'
     espdir = compounddir/'esp'
     # Copy over optimized and centered XYZ from grnstate calculation
-    shutil.copyfile(gnddir/'{}_optimized_centered.xyz'.format(compoundname), espdir)
+    filename = '{}_optimized_centered.xyz'.format(compoundname)
+    shutil.copyfile(gnddir/filename, espdir/filename)
     centeredfile = espdir.glob('*center*').__next__()
     
     # check for heavier atoms to replace with ECP
