@@ -2,19 +2,10 @@
 Setup directory in order to run job. Copies and fills out templates
 """
 
-import shutil, os, subprocess
+import shutil, os
 from pathlib import Path
 
 from nwxutils import *
-
-def mycopytree(src, dst, symlinks=False, ignore=None):
-    for item in os.listdir(src):
-        s = os.path.join(src, item)
-        d = os.path.join(dst, item)
-        if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
-        else:
-            shutil.copy2(s, d)
 
 
 def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
@@ -90,9 +81,10 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     compounddir = workdir/compoundname
 
     # Make esp dir
-    mycopytree(PL_ROOT/'template'/'esp', compounddir)
+    os.mkdirs(compounddir/'esp')
+    shutil.copy(PL_ROOT/'template'/'esp'/'input.nw', compounddir/'esp')
 
     # Set template vars in input file
     set_template_vars(compounddir/'esp'/'input.nw',
-        [('COMPOUND', compoundname),
-         ('SCRATCH_DIR', scratchdir)])
+                      [('COMPOUND', compoundname),
+                       ('SCRATCH_DIR', scratchdir)])
