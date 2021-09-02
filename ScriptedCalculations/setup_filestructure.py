@@ -81,6 +81,23 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     compounddir = workdir/compoundname
     espdir = compounddir/'esp'
 
+    # Check for calculation dir in working directory
+    if compounddir.exists():
+        print("Found existing working directory.")
+    else:
+        # If directory does not exist, make it
+        os.mkdir(compounddir)
+        os.mkdir(compounddir/'gndstate')
+
+    # If optimized and centered xyz file in input_xyz directory
+    optimized_xyz = 'input_xyz/{}_optimized_centered.xyz'.format(compoundname)
+    if optimized_xyz.exists():
+        print("Found optimized gemoetry file.")
+        shutil.copy(optimized_xyz, compounddir/'gndstate')
+    else:
+        print("Can't find working dir or optimized xyz file for {}".format(compoundname))
+        sys.exit(1)
+
     # Make calculation dir and move files into it
     if espdir.exists():
         print("Found existing esp directory. Deleting.") 
