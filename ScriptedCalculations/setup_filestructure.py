@@ -79,7 +79,12 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     compoundname = structfilename.stem
     structbasename = structfilename.name
     compounddir = workdir/compoundname
+    espdir = compounddir/'esp'
 
+    # Make calculation dir and move files into it
+    if espdir.exists():
+        print("Found existing esp directory. Deleting.") 
+        shutil.rmtree(espdir)  # Remove dir and replace if already exists
     # Make esp dir
     os.mkdir(compounddir/'esp')
     shutil.copy(PL_ROOT/'template'/'esp'/'input.nw', compounddir/'esp')

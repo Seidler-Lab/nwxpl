@@ -149,6 +149,10 @@ def run_esp(compoundname, env_config, workdir, outdir, numcores):
     exitcode = run_nwchem_job(espdir/'input.nw', env_config, espdir/'output.out', numcores)
     assert exitcode == 0, "NWChem call on esp charge calculation step returned exitcode {}!".format(exitcode)
 
+    # Collect desp file
+    print("Moving esp file to output directory")
+    shutil.copy(compounddir/'esp'/'{}.esp'.format(compoundname), outdir/'{}.esp'.format(compoundname))
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser( \
         description='Run a single structure through pipeline (Should be run WITHIN JOB)')
