@@ -93,7 +93,7 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
 
     # If optimized and centered xyz file in input_xyz directory
     optimized_xyz = 'input_xyz/{}_optimized_centered.xyz'.format(compoundname)
-    if optimized_xyz.exists() and not existing_directory:
+    if os.path.exists(optimized_xyz) and not existing_directory:
         print("Found optimized gemoetry file.")
         shutil.copy(optimized_xyz, compounddir/'gndstate')
     else:
