@@ -2,7 +2,7 @@
 Setup directory in order to run job. Copies and fills out templates
 """
 
-import shutil, os
+import shutil, os, sys
 from pathlib import Path
 
 from nwxutils import *
