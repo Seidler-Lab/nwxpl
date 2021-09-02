@@ -47,7 +47,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
             ('CHARGE', charge),
             ('MULT', mult)])
 
-    print(repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib')))
+    # print(repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib')))
 
     # Set template vars in job file and finalize
     # Note path strings are put through repr to add quotes, guarding spaces
@@ -85,11 +85,32 @@ def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
     existing_directory = False
     if compounddir.exists():
         print("Found existing working directory.")
-        existing_directory = True
-    else:
+        xanesdir = compounddir/'xanes'
+        if xanesdir.exists():
+            existing_directory = True
+        else:
+            print("Deleting exisiting directory because it's incomplete.")
+            shutil.rmtree(compounddir)  # Remove dir and replace if already exists
+
+    if not existing_directory:
         # If directory does not exist, make it
         os.mkdir(compounddir)
         os.mkdir(compounddir/'gndstate')
+        # copy and set template vars of job.run file
+        shutil.copy(PL_ROOT/'template'/'job.run', compounddir)
+        # Set template vars in job file and finalize
+        # Note path strings are put through repr to add quotes, guarding spaces
+        current_file_path = str(Path(__file__).resolve())
+        pipeline_Script = current_file_path.replace('setup_filestructure.py', 'runstructure.py')
+        set_template_vars(compounddir/'job.run',
+            [('JOB_NAME', compoundname),
+            ('PIPELINE_SCRIPT', repr(pipeline_Script)),
+            ('COMPOUND_NAME', compoundname),
+            ('WORK_DIR', repr(str(workdir))),
+            ('OUT_DIR', repr(str(outdir))),
+            ('MPI_PATH', repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib'))),
+            ('EMAIL', env_config['NWXPL_EMAIL'])])
+        finalize_template_vars(compounddir/'job.run')
 
     # If optimized and centered xyz file in input_xyz directory
     optimized_xyz = 'input_xyz/{}_optimized_centered.xyz'.format(compoundname)
