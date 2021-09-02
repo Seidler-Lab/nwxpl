@@ -241,8 +241,8 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
 
     # add ecp block
     ecp_block_template = 'ecp\nend\n'
-    filedata = re.sub("charge",
-                      '{}\ncharge'.format(ecp_block_template), filedata)
+    filedata = re.sub("task dft",
+                      '{}\ntask dft'.format(ecp_block_template), filedata)
 
     # make ECP block sub here
     for atom in heavy_atoms:
