@@ -179,5 +179,5 @@ if __name__ == '__main__':
 
     ENV_CONFIG = parse_env(".env")
 
-    #run_structure(COMPOUND_NAME, ENV_CONFIG, WORK_DIR, OUT_DIR, CORES)
-    run_esp(COMPOUND_NAME, ENV_CONFIG, WORK_DIR, OUT_DIR, CORES)
+    run_structure(COMPOUND_NAME, ENV_CONFIG, WORK_DIR, OUT_DIR, CORES)
+    #run_esp(COMPOUND_NAME, ENV_CONFIG, WORK_DIR, OUT_DIR, CORES)
