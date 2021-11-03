@@ -95,47 +95,57 @@ def run_structure(compoundname, env_config, workdir, outdir, numcores):
     assert exitcode == 0, "NWChem call on geometry optimization step returned exitcode {}!".format(exitcode)
         
     # Run ground state calculation
-    exitcode = run_gnd_state_calculation(compoundname, env_config, compounddir, numcores)
-    assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
+    # exitcode = run_gnd_state_calculation(compoundname, env_config, compounddir, numcores)
+    # assert exitcode == 0, "NWChem call on gnd state calculation step returned exitcode {}!".format(exitcode)
             
     # Run XANES calculation
-    exitcode = run_xanes_calculation(compoundname, env_config, compounddir, numcores)
-    assert exitcode == 0, "NWChem call on xanes calculation step returned exitcode {}!".format(exitcode)
+    # exitcode = run_xanes_calculation(compoundname, env_config, compounddir, numcores)
+    # assert exitcode == 0, "NWChem call on xanes calculation step returned exitcode {}!".format(exitcode)
     
     # Run XES calculation
-    exitcode = run_xes_calculation(compoundname, env_config, compounddir, numcores)
-    assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
+    # exitcode = run_xes_calculation(compoundname, env_config, compounddir, numcores)
+    # assert exitcode == 0, "NWChem call on xes calculation step returned exitcode {}!".format(exitcode)
     
     # Extract dat from XANES output
     # TODO: make these function calls within python rather than a shell calls
-    print("Extracting spectrum from XANES output for {}".format(compoundname))
-    subprocess.run(['python', 'ToolScripts/nw_spectrum_xanes.py', '-x',
-        '-i', (compounddir/'xanes'/'output.out').resolve(),
-        '-o', (compounddir/'xanes'/'xanes.dat').resolve()])
+    # print("Extracting spectrum from XANES output for {}".format(compoundname))
+    # subprocess.run(['python', 'ToolScripts/nw_spectrum_xanes.py', '-x',
+    #     '-i', (compounddir/'xanes'/'output.out').resolve(),
+    #     '-o', (compounddir/'xanes'/'xanes.dat').resolve()])
 
     # Extract dat from XES output
-    print("Extracting spectrum from XES output for {}".format(compoundname))    
-    subprocess.run(['python', 'ToolScripts/nw_spectrum_xes.py', '-x',
-         '-i', (compounddir/'xescalc'/'output.out').resolve(),
-         '-o', (compounddir/'xescalc'/'xes.dat').resolve()])
+    # print("Extracting spectrum from XES output for {}".format(compoundname))    
+    # subprocess.run(['python', 'ToolScripts/nw_spectrum_xes.py', '-x',
+    #      '-i', (compounddir/'xescalc'/'output.out').resolve(),
+    #      '-o', (compounddir/'xescalc'/'xes.dat').resolve()])
 
     # Collect dats
-    print("Moving spectrum dat files to output directory")
-    shutil.copy(compounddir/'xanes'/'xanes.dat', outdir/'{}_xanes.dat'.format(compoundname))
-    shutil.copy(compounddir/'xescalc'/'xes.dat', outdir/'{}_xes.dat'.format(compoundname))
-    
+    # print("Moving spectrum dat files to output directory")
+    # shutil.copy(compounddir/'xanes'/'xanes.dat', outdir/'{}_xanes.dat'.format(compoundname))
+    # shutil.copy(compounddir/'xescalc'/'xes.dat', outdir/'{}_xes.dat'.format(compoundname))
+
+    # Collect dats
+    print("Moving optimized geometry files to output directory")
+    geomdir = compounddir/'geometryoptimize'
+    # Copy over optimized XYZ and center it
+    highestxyznum = find_highest_number_xyz_file(geomdir/'xyzfiles')
+    highestxyzpath = geomdir/'xyzfiles'/'{}-{:03}.xyz'.format(compoundname, highestxyznum)
+    optimizedfilepath = outdir/(compoundname+'_optimized.xyz')
+    shutil.copyfile(highestxyzpath, optimizedfilepath)
+    centeredfile = center_xyz(optimizedfilepath,0)
+
 def run_esp(compoundname, env_config, workdir, outdir, numcores):
     compounddir = workdir/compoundname
-            
+
     print("Starting ESP Charge Calculation for {}".format(compoundname))
-    
+
     gnddir = compounddir/'gndstate'
     espdir = compounddir/'esp'
     # Copy over optimized and centered XYZ from grnstate calculation
     filename = '{}_optimized_centered.xyz'.format(compoundname)
     shutil.copyfile(gnddir/filename, espdir/filename)
     centeredfile = espdir.glob('*center*').__next__()
-    
+
     # check for heavier atoms to replace with ECP
     heavy_atoms = check_for_heavy_atoms(centeredfile)
     if ecp_required(heavy_atoms):
