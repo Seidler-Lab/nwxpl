@@ -231,13 +231,14 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
         filedata = f.read()
 
     # add exception line
-    filedata = re.sub("except P",
-                      "except P {}".format(' '.join(heavy_atoms)),
+    filedata = re.sub("except [COMPOUND=]",
+                      "except [COMPOUND=] {}".format(' '.join(heavy_atoms)),
                       filedata)
 
     # add basis library substitution
     for atom in heavy_atoms:
-        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom, ecp), filedata)
+        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom, ecp),
+                          filedata)
 
     # add ecp block
     ecp_block_template = 'ecp\nend\n'
