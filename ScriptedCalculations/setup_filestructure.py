@@ -1,6 +1,4 @@
-"""
-Setup directory in order to run job. Copies and fills out templates
-"""
+"""Setup directory in order to run job. Copies and fills out templates."""
 
 import shutil, os, sys
 from pathlib import Path
@@ -9,7 +7,7 @@ from nwxutils import *
 
 
 def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
-                            scratchdir, outdir, charge=0):
+                            scratchdir, outdir, atom, charge=0):
     """
     Set up filestructure in working dir before job is started.
 
@@ -25,10 +23,10 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     # Read basis code
     with basisfilename.open() as f:
         basisdata = f.read()
-     
+
     # Make calculation dir and move files into it
     if compounddir.exists():
-        print("Found existing directory. Deleting.") 
+        print("Found existing directory. Deleting.")
         shutil.rmtree(compounddir)  # Remove dir and replace if already exists
     shutil.copytree(PL_ROOT/'template', compounddir)  # Copy template dirs
     shutil.copy(structfilename, compounddir/'geometryoptimize/')    # Copy XYZ
@@ -37,7 +35,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     mult = basic_multiplicity_from_atoms(read_xyz(structfilename))
 
     # Set common template vars in all nwchem input files
-    # (values will changed/finalized during job)
+    # (values will be changed/finalized during the job)
     for nwchemstage in ['geometryoptimize', 'gndstate', 'xanes', 'xescalc']:
         set_template_vars(compounddir/nwchemstage/'input.nw',
             [('COMPOUND', compoundname),
@@ -45,7 +43,8 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
             #('PERMANENT_DIR', str(workdir/compoundname)),
             # ('BASIS_DATA', basisdata),
             ('CHARGE', charge),
-            ('MULT', mult)])
+            ('MULT', mult)
+            ('ATOM', atom)])
 
     # print(repr(str(Path(env_config['NWXPL_MPI_PATH'])/'lib')))
 
@@ -67,7 +66,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
 
 
 def setup_esp_filestructure(structfilename, env_config, basisfilename, workdir,
-                            scratchdir, outdir, charge=0):
+                            scratchdir, outdir, atom, charge=0):
     """
     Set up esp filestructure in working dir before job is started.
 
