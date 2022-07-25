@@ -1,6 +1,4 @@
-"""
-Useful functions for use in pipeline scripts.
-"""
+"""Useful functions for use in pipeline scripts."""
 
 import re
 import subprocess
@@ -8,23 +6,50 @@ from subprocess import run
 import warnings
 from pathlib import Path
 
+
+PERIODIC_TABLE = \
+    ['H',  'He', 'Li', 'Be', 'B',  'C',  'N',  'O',  'F',  'Ne',
+     'Na', 'Mg', 'Al', 'Si', 'P',  'S',  'Cl', 'Ar', 'K',  'Ca', 'Sc', 'Ti',
+     'V'.  'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se',
+     'Br', 'Kr', 'Rb', 'Sr', 'Y',  'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd',
+     'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I',  'Xe', 'Cs', 'Ba', 'La', 'Ce',
+     'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb',
+     'Lu', 'Hf', 'Ta', 'W',  'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb',
+     'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U',  'Np', 'Pu',
+     'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg',
+     'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc', 'Lv', 'Ts', 'Og']
+
+
 def parse_env(envpath):
-	with Path(envpath).open() as f:
-		data = f.readlines()
-	env=dict()
-	for line in data:
-		if line.startswith('#') or not line.strip(): continue	#Ignore comments & blanks
-		pair = line.split('=')
-		env[pair[0].strip()] = pair[1].strip()
-	return env
+    """Parse personal env file."""
+    with Path(envpath).open() as f:
+        data = f.readlines()
+    env = dict()
+    for line in data:
+        if line.startswith('#') or not line.strip():
+            continue  # Ignore comments & blanks
+        pair = line.split('=')
+        env[pair[0].strip()] = pair[1].strip()
+    return env
+
 
 def run_nwchem_job(jobfile, env_config, outfile, cores):
     """Run an nwchem job, write output to file, and return errorcode."""
-    completedjob = run([str((Path(env_config['NWXPL_MPI_PATH'])/'bin'/'mpirun').resolve()),
-                        '-n', str(cores),
-                        'nwchem', str(jobfile.name)],
+    # Run on Hyak using:
+    # mpi_path = Path(env_config['NWXPL_MPI_PATH'])
+    # completedjob = run([str( (mpi_path/'bin'/'mpirun').resolve() ),
+    #                    '-n', str(cores),
+    #                    'nwchem', str(jobfile.name)],
+    #                   cwd=jobfile.parent,
+    #                   capture_output=True)
+
+    # Run on Tahoma using:
+    completedjob = run(['mpirun', '-ppn', str(cores),
+                        '/tahoma/emsls51190/nwchem-exec/nwchem-master',
+                        str(jobfile.name)],
                        cwd=jobfile.parent,
                        capture_output=True)
+
     with open(outfile, 'wb') as f:
         f.write(completedjob.stdout)
     return completedjob.returncode
@@ -100,26 +125,19 @@ def finalize_template_vars(tfile):
         f.write(data)
 
 
-def basic_multiplicity_from_atoms(atoms):
+def basic_multiplicity_from_atoms(geometryfile):
     """
     Get electron multiplicity from atoms.
 
-    Formatted like output from read_xyz.
+    Atoms formatted like output from read_xyz.
     """
-    return 1
-    try:
-        import periodictable
-        electrons = 0
-        for a in atoms:
-            electrons += periodictable.__getattribute__(a).number
-        print('{} electrons, which means basic multiplicity {}'.format(
-            electrons, electrons % 2 + 1))
-        return electrons % 2 + 1
-    except ModuleNotFoundError:
-        warnings.warn("Can't import 'periodictable'")
-    finally:
-        print("Returning multiplicity of 1.")
-        return 1
+    atoms, coords = read_xyz(geometryfile)
+    electrons = 0
+    for a in atoms:
+        electrons += PERIODIC_TABLE.index(a) + 1
+    print('{} electrons, which means basic multiplicity {}'.format(
+          electrons, electrons % 2 + 1))
+    return electrons % 2 + 1
 
 
 def read_xyz(file):
@@ -194,7 +212,7 @@ def get_highest_occupied_beta_movec(infile):
     """Retrieve highest occupied beta movec from groundstate calc output."""
     with open(infile, 'r') as f:
         content = f.read()
-        borbitalsindex = content.index('DFT Final Beta Molecular Orbital Analysis')
+        borbitalsindex = content.index('DFT Final Beta Molec Orbital Analysis')
         betaorbitals = content[borbitalsindex:]
         occ0index = betaorbitals.index('Occ=0')
         f.seek(borbitalsindex + occ0index)
@@ -204,12 +222,13 @@ def get_highest_occupied_beta_movec(infile):
         return int(r.split()[1]) - 1
 
 
-def check_for_heavy_atoms(infile):
+def check_for_heavy_atoms(infile, atom):
     """Check xyz file for any atoms larger than target atom."""
     heavy_atoms = []
     with open(infile, 'r') as f:
         data = f.read()
-    check_these_atoms = ['Br', 'Cl', 'S']
+    check_these_atoms = [a for i, a in enumerate(PERIODIC_TABLE)
+                         if i > PERIODIC_TABLE.index(atom)]
     for atom in check_these_atoms:
         if atom in data:
             heavy_atoms.append(atom)
@@ -237,7 +256,8 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
 
     # add basis library substitution
     for atom in heavy_atoms:
-        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom, ecp),
+        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom,
+                                                                         ecp),
                           filedata)
 
     # add ecp block
@@ -247,7 +267,8 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
 
     # make ECP block sub here
     for atom in heavy_atoms:
-        filedata = re.sub("ecp", "ecp\n  {} library {}".format(atom, ecp), filedata)
+        filedata = re.sub("ecp", "ecp\n  {} library {}".format(atom, ecp),
+                          filedata)
 
     with open(infile, 'w') as f:
         f.write(filedata)
