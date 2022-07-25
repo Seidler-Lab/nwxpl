@@ -1,14 +1,14 @@
 #!/bin/csh -f
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 36
-#SBATCH -t 24:00:00
-#SBATCH -A emsls51190
-#SBATCH -o run.out
-#SBATCH -e myjob.err
-#SBATCH -J testjob
+#SBATCH -t [TIME=20:00:00]
+#SBATCH -A emsle60173
+#SBATCH -o [JOB_NAME=].out
+#SBATCH -e [JOB_NAME=].err
+#SBATCH -J [JOB_NAME=]
 #SBATCH --export ALL
 #SBATCH --mail-type=FAIL,END
-#SBATCH --mail-user niri.govind@pnnl.gov
+#SBATCH --mail-user [EMAIL=]
 
 # Print out some information for refund purposes
 ############################################################################
@@ -44,8 +44,8 @@ setenv I_MPI_DEBUG 1
 
 
 setenv ARMCI_DEFAULT_SHMMAX 16384
-setenv NWCHEM_BASIS_LIBRARY "/cluster/apps/nwchem/nwchem-7.0.1/src/basis/libraries/"
-setenv NWCHEM_NWPW_LIBRARY "/cluster/apps/nwchem/nwchem-7.0.1/src/nwpw/libraryps/"
+setenv NWCHEM_BASIS_LIBRARY "/cluster/apps/nwchem/nwchem-master/src/basis/libraries/"
+setenv NWCHEM_NWPW_LIBRARY "/cluster/apps/nwchem/nwchem-master/src/nwpw/libraryps/"
 #this disables threaded in MKL since it is better to keep it to advanced users
 setenv OMP_NUM_THREADS 1
 setenv MKL_NUM_THREADS 1
@@ -53,9 +53,10 @@ setenv NWC_RANKS_PER_DEVICE 0
 setenv ARMCI_OPENIB_DEVICE mlx5_0
 
 setenv MPIRETURN 999
-ldd  /tahoma/emsls51190/nwchem-exec/nwchem-7.0.2 
-mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
-setenv MPIRETURN $?
+ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
+#mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
+python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28]
+#setenv MPIRETURN $?
 
 ############################################################################
 # End of the job script

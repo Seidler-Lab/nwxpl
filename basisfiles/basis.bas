@@ -1,20 +1,5 @@
-echo
-
-scratch_dir [SCRATCH_DIR=]
-permanent_dir [PERMANENT_DIR=]
-
-start [COMPOUND=]
-
-title "[COMPOUND=]"
-
-memory 7500 mb noverify
-
-geometry units angstrom noautosym nocenter noautoz
-  load [GEOMETRY_FILE=]
-end
-
 basis "ao basis" spherical print
-* library 6-311G** except [ATOM=]
+  * library 6-311G** except [ATOM=]
 # Sapporo QZP-2012
 [ATOM=]    S
      49255.9631430     0.0006800
@@ -82,20 +67,3 @@ basis "ao basis" spherical print
          0.8764110     0.5890959
          0.3676200     0.5269469
 end
-
-charge [CHARGE=]
-
-dft
-  xc pbe0
-  print "final vectors analysis"
-  maxiter 500
-  mulliken
-  direct
-end
-
-tddft
-	ecut [ECUT=]
-	nroots 65
-	notriplet
-end
-task tddft
