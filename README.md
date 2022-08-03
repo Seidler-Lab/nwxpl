@@ -27,10 +27,10 @@ The NWChem calculations are the following (in order):
 The .env file should look something like:
 
 ```
-	WORK_DIR=/home/working/
-	SCRATCH_DIR=/home/working/scratch/
-	OUT_DIR=/home/out/
-	EMAIL=myemail@gmail.com
+WORK_DIR=/home/working/
+SCRATCH_DIR=/home/working/scratch/
+OUT_DIR=/home/out/
+EMAIL=myemail@gmail.com
 ```
 
 If you use `EMAIL=None`, then you will **not** get an email notifcation when your job has completed.
