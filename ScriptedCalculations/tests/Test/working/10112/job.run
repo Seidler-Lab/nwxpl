@@ -1,0 +1,33 @@
+#!/bin/csh -f
+#SBATCH --job-name=[JOB_NAME=]
+#SBATCH --account=stf
+#SBATCH --partition=stf
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=[CORES=28]
+#SBATCH --time=[TIME=20:00:00]
+#SBATCH --mem=[MEMORY=100G]
+#SBATCH --output=[WORK_DIR=]/[COMPOUND_NAME=]/slurm-job.out
+##SBATCH --mail-type=END,FAIL
+##SBATCH --mail-user=[EMAIL=]	
+source /etc/profile.d/modules.csh
+module purge
+module load contrib/python_3.8/3.8
+module load contrib/NWChem
+setenv ARMCI_DEFAULT_SHMMAX 32768
+setenv NWCHEM_BASIS_LIBRARY "/sw/contrib/NWChem/nwchem-6.6/src/basis/libraries/"
+setenv NWCHEM_NWPW_LIBRARY "/sw/contrib/NWChem/nwchem-6.6/src/nwpw/libraryps/"
+setenv ARMCI_OPENIB_DEVICE mlx4_0
+setenv OMP_NUM_THREADS 1
+setenv MKL_NUM_THREADS 1
+setenv NWC_RANKS_PER_DEVICE 0
+setenv OFFLOAD_INIT on_offload
+setenv MPIRETURN 999
+setenv LD_LIBRARY_PATH [MPI_PATH=]
+python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28]
+setenv MPIRETURN $?
+
+############################################################################
+# End of the job script
+############################################################################
+
+exit $MPIRETURN

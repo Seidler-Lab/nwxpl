@@ -42,7 +42,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
                            # ('PERMANENT_DIR', str(workdir/compoundname)),
                            # ('BASIS_DATA', basisdata),
                            ('CHARGE', charge),
-                           ('MULT', mult)
+                           ('MULT', mult),
                            ('ATOM', atom)])
 
     # Set template vars in job file and finalize
@@ -50,16 +50,17 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     current_file_path = str(Path(__file__).resolve())
     pipeline_script = current_file_path.replace('setup_filestructure.py',
                                                 'runstructure.py')
-    mpi_path = str(Path(env_config['NWXPL_MPI_PATH'])/'lib')
+    #mpi_path = str(Path(env_config['NWXPL_MPI_PATH'])/'lib')
     set_template_vars(compounddir/'tahoma.sbatch',
                       [('JOB_NAME', compoundname),
                        ('PIPELINE_SCRIPT', repr(pipeline_script)),
                        ('COMPOUND_NAME', compoundname),
                        ('WORK_DIR', repr(str(workdir))),
                        ('OUT_DIR', repr(str(outdir))),
-                       ('MPI_PATH', repr(mpi_path)),
-                       ('EMAIL', env_config['NWXPL_EMAIL'])])
-    finalize_template_vars(compounddir/'job.run')
+                       #('MPI_PATH', repr(mpi_path)),
+                       ('EMAIL', env_config['EMAIL'])])
+    #finalize_template_vars(compounddir/'job.run')
+    finalize_template_vars(compounddir/'tahoma.sbatch')
 
     if run_esp:
         espdir = compounddir/'esp'

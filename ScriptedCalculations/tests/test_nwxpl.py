@@ -9,21 +9,36 @@ To see more options use '-h' flag.
 import argparse
 from pathlib import Path
 import sys
+import os
 
-from nwxutils import parse_env, start_batch_job
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from nwxutils import parse_env
 from setup_filestructure import setup_job_filestructure
 
 
-def run_calculation(structfilename, env_config, basisfilename, workdir,
-                    scratchdir, outdir, atom, charge, run_esp=False):
+def test_job(jobfile):
+    with open(jobfile, 'r') as file:
+        for line in file:
+            if line.startswith('python'):
+                print(line)
+                break
+    file.close()
+
+
+def test_run_calculation(structfilename, env_config, basisfilename, workdir,
+                         scratchdir, outdir, atom, charge, run_esp=False):
     """Setup and start a job for a structure. Arguments are Path objects."""
     compoundname = structfilename.stem
     print("\nSetting up for {}".format(compoundname))
     setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
-                            scratchdir, outdir, atom, charge=charge, run_esp=run_esp)
+                            scratchdir, outdir, atom, charge=charge,
+                            run_esp=run_esp)
     print("Starting job for {}".format(compoundname))
     # from nwxutils.py
-    # start_batch_job(jobfile=str(workdir/compoundname/'tahoma.sbatch'))
+    test_job(jobfile=str(workdir/compoundname/'tahoma.sbatch'))
 
 
 if __name__ == '__main__':
@@ -72,7 +87,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Load environment vars
-    ENV_CONFIG = parse_env(".env")  # from nwxutils.py
+    ENV_CONFIG = parse_env("test_env.env")  # from nwxutils.py
 
     structurelist = None
     # Run each structure in list
@@ -84,5 +99,5 @@ if __name__ == '__main__':
         sys.exit(1)
 
     for structfilename in structurelist:
-        run_calculation(structfilename, ENV_CONFIG, BASIS_FILENAME, WORK_DIR,
-                        SCRATCH_DIR, OUT_DIR, ATOM, CHARGE, run_esp=run_esp)
+        test_run_calculation(structfilename, ENV_CONFIG, BASIS_FILENAME, WORK_DIR,
+                             SCRATCH_DIR, OUT_DIR, ATOM, CHARGE, run_esp=run_esp)

@@ -1,14 +1,14 @@
 #!/bin/csh -f
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 36
-#SBATCH -t [TIME=20:00:00]
+#SBATCH -t 20:00:00
 #SBATCH -A emsle60173
-#SBATCH -o [JOB_NAME=].out
-#SBATCH -e [JOB_NAME=].err
-#SBATCH -J [JOB_NAME=]
+#SBATCH -o 10112.out
+#SBATCH -e 10112.err
+#SBATCH -J 10112
 #SBATCH --export ALL
 #SBATCH --mail-type=FAIL,END
-#SBATCH --mail-user [EMAIL=]
+#SBATCH --mail-user stetef@uw.edu
 
 # Print out some information for refund purposes
 ############################################################################
@@ -55,7 +55,7 @@ setenv ARMCI_OPENIB_DEVICE mlx5_0
 setenv MPIRETURN 999
 ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
 #mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
-python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28]
+python 'C:\\Users\\saman\\Desktop\\Research\\P ML\\nwxpl\\ScriptedCalculations\\runstructure.py' 10112 'C:\\Users\\saman\\Desktop\\Research\\P ML\\nwxpl\\ScriptedCalculations\\tests\\Test\\working' 'C:\\Users\\saman\\Desktop\\Research\\P ML\\nwxpl\\ScriptedCalculations\\tests\\Test\\out' 28
 #setenv MPIRETURN $?
 
 ############################################################################

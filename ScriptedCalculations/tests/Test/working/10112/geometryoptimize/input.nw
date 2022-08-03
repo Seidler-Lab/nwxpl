@@ -1,0 +1,39 @@
+echo
+
+scratch_dir [SCRATCH_DIR=C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch]
+permanent_dir [PERMANENT_DIR=]
+
+start [COMPOUND=10112]
+
+title "[COMPOUND=10112]"
+
+memory 7500 mb noverify
+
+geometry units angstrom noautosym nocenter noautoz
+  load [COMPOUND=10112].xyz
+end
+
+basis "ao basis" spherical print
+   * library 6-31G*
+end
+
+charge [CHARGE=0]
+
+dft
+  xc b3lyp
+  mult [MULT=1]
+  odft
+  maxiter 500
+  print "final vectors analysis"
+  direct
+  mulliken
+end
+
+driver
+  maxiter 500
+  xyz xyzfiles/[COMPOUND=10112]
+end
+
+task dft optimize
+
+
