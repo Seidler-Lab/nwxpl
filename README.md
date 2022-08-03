@@ -2,11 +2,11 @@
 
 This pipeline can run 5 separate NWChem calculations using one job per structure, managed by python scipts.
 
-## The pipeline
+## Pipeline capabilities
 
 The NWChem calculations are the following (in order):
 
-1. Geomtry optimization
+1. Geomtry Optimization
 2. Ground State Calculation
 3. Valence-to-Core X-ray Emission Spectroscopy (VtC-XES)
 4. X-ray Absoprtion Near-Edge Fine Strcuture (XANES)
@@ -22,20 +22,20 @@ The NWChem calculations are the following (in order):
 6. Adjust the `.env` file with your preferences.
 7. Run `run_nwxpl.sh` by, for example, using the command `./run_nwxpl.sh`.
 
-### The .env file
+#### The .env file
 
 The .env file should look something like:
 
-`
-WORK_DIR=/home/working/
-SCRATCH_DIR=/home/working/scratch/
-OUT_DIR=/home/out/
-EMAIL=myemail@gmail.com
-`
+```
+	WORK_DIR=/home/working/
+	SCRATCH_DIR=/home/working/scratch/
+	OUT_DIR=/home/out/
+	EMAIL=myemail@gmail.com
+```
 
 If you use `EMAIL=None`, then you will **not** get an email notifcation when your job has completed.
 
-### The `tests` directory
+#### The `tests` directory
 
 Within `ScriptedCalculations/tests/` is an example of `1.list` and where to put your `xyz` files. Running `test_run.sh` within this directory will go through all of the python within the pipeline including copying over template files and manipulating them, but will **not** submit actual NWChem jobs.
 
