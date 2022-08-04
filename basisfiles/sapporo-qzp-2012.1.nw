@@ -1,18 +1,3 @@
-echo
-
-scratch_dir C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch
-permanent_dir 
-
-start 10112
-
-title "10112"
-
-memory 7500 mb noverify
-
-geometry units angstrom noautosym nocenter noautoz
-  load 10112_optimized_centered.xyz
-end
-
 #----------------------------------------------------------------------
 # Basis Set Exchange
 # Version v0.9
@@ -26,8 +11,7 @@ end
 
 
 BASIS "ao basis" SPHERICAL PRINT
-* library 6-311G** except Ca
-#BASIS SET: (19s,14p,5d,3f,1g) -> (9s,7p,4d,2f,1g)
+#BASIS SET: (19s,14p,5d,3f,1g) -> [9s,7p,4d,2f,1g]
 Ca    S
   79415.2985660              0.0006570
   11912.6258840              0.0050740
@@ -94,28 +78,3 @@ Ca    F
 Ca    G
       1.3950090              1.0000000
 END
-
-
-charge 1
-
-dft
-  xc pbe0
-  odft
-  mult 1
-  print "final vectors analysis"
-  maxiter 500
-  mulliken
-  direct
-  max_ovl
-  vectors input Ca.movecs swap beta 1 42 output Ca-swap.movecs
-end
-
-task dft
-
-tddft
-  notriplet
-  cis
-  nroots 42
-end
-
-task tddft

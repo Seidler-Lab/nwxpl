@@ -1,6 +1,6 @@
 # NWXPL (**NW**chem **X**-ray calculation **P**ipe**L**ine)
 
-This pipeline can run 5 separate NWChem calculations using one job per structure, managed by python scipts.
+This pipeline can run 5 separate NWChem calculations using one job per structure, all of which is managed by python scipts.
 
 ## Pipeline capabilities
 
@@ -9,7 +9,7 @@ The NWChem calculations are the following (in order):
 1. Geomtry Optimization
 2. Ground State Calculation
 3. Valence-to-Core X-ray Emission Spectroscopy (VtC-XES)
-4. X-ray Absoprtion Near-Edge Fine Strcuture (XANES)
+4. X-ray Absoprtion Near-Edge Fine Structure (XANES)
 5. (optional) ElectroStatic Potential (ESP)
 
 ## How to use the pipeline
@@ -39,3 +39,8 @@ If you use `EMAIL=None`, then you will **not** get an email notifcation when you
 
 Within `ScriptedCalculations/tests/` is an example of `1.list` and where to put your `xyz` files. Running `test_run.sh` within this directory will go through all of the python within the pipeline including copying over template files and manipulating them, but will **not** submit actual NWChem jobs.
 
+# Basis sets
+
+Choosing an appropriate basis set for your desired element can be done at https://www.basissetexchange.org/.
+
+Select the element of your calculation and choose a basis set from the list on the left. Below the periodic table, you will have the option to get the basis set in a form appropriate for NWChem, which you can then copy to your clipboard or download.

@@ -33,10 +33,9 @@ def parse_env(envpath):
     return env
 
 
-def run_nwchem_job(jobfile, env_config, outfile, cores):
+def run_nwchem_job(jobfile, mpi_path, outfile, cores):
     """Run an nwchem job, write output to file, and return errorcode."""
     # Run on Hyak using:
-    # mpi_path = Path(env_config['NWXPL_MPI_PATH'])
     # completedjob = run([str( (mpi_path/'bin'/'mpirun').resolve() ),
     #                    '-n', str(cores),
     #                    'nwchem', str(jobfile.name)],

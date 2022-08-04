@@ -7,5 +7,5 @@ echo Working directory: $work
 echo Scratch directory: $scratch
 echo Out directory: $out
 echo Email: $email
-#module load contrib/python_3.8/3.8
-python test_nwxpl.py -i 1.list -b ../../basisfiles/basis.bas -w $work -s $scratch -o $out -a Ca
+python ../nwxpl.py --inlist 1.list --basefile ../../basisfiles/sapporo-qzp-2012.1.nw \
+--workdir $work --scratchdir $scratch --outputdir $out --atom Ca --charge 0 --test True
