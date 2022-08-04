@@ -271,4 +271,4 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
 
     with open(infile, 'w') as f:
         f.write(filedata)
-    return
+    f.close()
