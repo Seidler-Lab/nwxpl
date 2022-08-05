@@ -2,4 +2,4 @@ __pycache__/
 ScriptedCalculations/.env
 ScriptedCalculations/__pycache__/
 ScriptedCalculations/__pycache__/*
-ScriptedCalculations/input_xyz/*
+ScriptedCalculations/input_xyz/*.xyz
