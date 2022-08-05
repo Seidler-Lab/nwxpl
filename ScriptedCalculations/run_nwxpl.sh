@@ -1,8 +1,8 @@
 #!/bin/bash
-scratch=$(grep SCRATCH_DIR= test_env.env | cut -d '=' -f2)
-work=$(grep WORK_DIR= test_env.env | cut -d '=' -f2)
-out=$(grep OUT_DIR= test_env.env | cut -d '=' -f2)
-email=$(grep EMAIL= test_env.env | cut -d '=' -f2)
+scratch=$(grep SCRATCH_DIR= env.env | cut -d '=' -f2)
+work=$(grep WORK_DIR= env.env | cut -d '=' -f2)
+out=$(grep OUT_DIR= env.env | cut -d '=' -f2)
+email=$(grep EMAIL= env.env | cut -d '=' -f2)
 echo Working directory: $work
 echo Scratch directory: $scratch
 echo Out directory: $out
