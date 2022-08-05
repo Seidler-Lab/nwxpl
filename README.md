@@ -48,5 +48,5 @@ Select the element of your calculation and choose a basis set from the list on t
 # Flowchart of the pipeline
 
 <p align="center">
-<img src="flowchart.png" alt="flowchart" width="600">
+<img src="flowchart.png" alt="flowchart" width="500">
 </p>
