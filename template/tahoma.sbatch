@@ -1,7 +1,7 @@
 #!/bin/csh -f
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 36
-#SBATCH -t [TIME=20:00:00]
+#SBATCH -t [TIME=5:00:00]
 #SBATCH -A emsle60173
 #SBATCH -o [JOB_NAME=].out
 #SBATCH -e [JOB_NAME=].err

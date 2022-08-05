@@ -44,3 +44,9 @@ Within `ScriptedCalculations/tests/` is an example of `1.list` and where to put 
 Choosing an appropriate basis set for your desired element can be done at https://www.basissetexchange.org/.
 
 Select the element of your calculation and choose a basis set from the list on the left. Below the periodic table, you will have the option to get the basis set in a form appropriate for NWChem, which you can then copy to your clipboard or download.
+
+# Flowchart of the pipeline
+
+<p align="center">
+<img src="flowchart.png" alt="flowchart" width="600">
+</p>

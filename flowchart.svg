@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="120.81845mm"
+   height="120.44046mm"
+   viewBox="0 0 120.81845 120.44046"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="flowchart.svg"
+   inkscape:export-filename="C:\Users\saman\Desktop\Research\P ML\nwxpl\flowchart.png"
+   inkscape:export-xdpi="800"
+   inkscape:export-ydpi="800">
+  <defs
+     id="defs2">
+    <rect
+       x="-6.6145835"
+       y="141.55208"
+       width="22.489582"
+       height="6.6145835"
+       id="rect1006" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="159.1812"
+     inkscape:cy="225.00672"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="2869"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid889"
+       originx="-15.063988"
+       originy="-44.168157" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-15.063988,-44.168157)">
+    <rect
+       style="fill:#5f8dd3;fill-rule:evenodd;stroke:#5f8dd3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect893"
+       width="50.270832"
+       height="26.458334"
+       x="79.38884"
+       y="68.791664"
+       ry="0" />
+    <rect
+       style="fill:#008080;fill-rule:evenodd;stroke:#008080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect891"
+       width="44.979168"
+       height="26.458332"
+       x="23.812498"
+       y="68.791664"
+       ry="0" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#008080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect903"
+       width="44.979168"
+       height="7.9375"
+       x="23.812498"
+       y="68.791664"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="46.217091"
+       y="74.121788"
+       id="text835"><tspan
+         sodipodi:role="line"
+         id="tspan833"
+         x="46.217091"
+         y="74.121788"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">.env</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="45.514389"
+       y="83.796745"
+       id="text839"><tspan
+         sodipodi:role="line"
+         x="45.514389"
+         y="83.796745"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan841">Personal</tspan><tspan
+         sodipodi:role="line"
+         x="45.514389"
+         y="90.852295"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan909">settings</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#3771c8;stroke-width:0.966909;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect905"
+       width="50.298512"
+       height="7.4168005"
+       x="79.375"
+       y="69.312363"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="104.33472"
+       y="74.990265"
+       id="text845"><tspan
+         sodipodi:role="line"
+         id="tspan843"
+         x="104.33472"
+         y="74.990265"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">run_nwxpl.sh</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="45.714706"
+       y="115.84327"
+       id="text853"><tspan
+         sodipodi:role="line"
+         id="tspan851"
+         x="45.714706"
+         y="115.84327"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">setup</tspan><tspan
+         sodipodi:role="line"
+         x="45.714706"
+         y="122.89882"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan978">filestructure</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="104.45914"
+       y="151.19597"
+       id="text863"><tspan
+         sodipodi:role="line"
+         id="tspan861"
+         x="104.45914"
+         y="151.19597"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">runstructure.py</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="104.70324"
+       y="56.528183"
+       id="text867"><tspan
+         sodipodi:role="line"
+         id="tspan865"
+         x="104.70324"
+         y="56.528183"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">Executable</tspan><tspan
+         sodipodi:role="line"
+         x="104.70324"
+         y="63.583733"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan875">files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="104.19202"
+       y="84.083809"
+       id="text871"><tspan
+         sodipodi:role="line"
+         id="tspan869"
+         x="104.19202"
+         y="84.083809"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">Head script to</tspan><tspan
+         sodipodi:role="line"
+         x="104.19202"
+         y="91.139359"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan873">run pipeline</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="46.758144"
+       y="55.59206"
+       id="text879"><tspan
+         sodipodi:role="line"
+         id="tspan877"
+         x="46.758144"
+         y="55.59206"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">Helper files</tspan><tspan
+         sodipodi:role="line"
+         x="46.758144"
+         y="62.64761"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan881">that are read in</tspan></text>
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#800080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect885"
+       width="55.5625"
+       height="113.77083"
+       x="76.743004"
+       y="47.625"
+       ry="0" />
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#d45500;stroke-width:0.8;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect895"
+       width="44.979168"
+       height="21.166683"
+       x="23.547915"
+       y="107.68546"
+       ry="2.9938729" />
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#d45500;stroke-width:0.8;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect901"
+       width="50.270836"
+       height="13.229157"
+       x="79.375"
+       y="142.875"
+       ry="1.8711679" />
+    <rect
+       style="fill:#008080;fill-rule:evenodd;stroke:#008080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect893-0"
+       width="50.270832"
+       height="26.458334"
+       x="79.110413"
+       y="105.83337"
+       ry="0" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#008080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect905-1"
+       width="50.270832"
+       height="7.9375"
+       x="79.110413"
+       y="105.83337"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="104.05629"
+       y="111.49746"
+       id="text845-6"><tspan
+         sodipodi:role="line"
+         id="tspan843-9"
+         x="104.05629"
+         y="111.49746"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583">nwxpl.py</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="103.91357"
+       y="121.66011"
+       id="text871-0"><tspan
+         sodipodi:role="line"
+         x="103.91357"
+         y="121.66011"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan873-0">Submit sbatch or</tspan><tspan
+         sodipodi:role="line"
+         x="103.91357"
+         y="128.71567"
+         style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+         id="tspan961">jobfile to queue</tspan></text>
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#800080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect885-5"
+       width="55.5625"
+       height="113.77084"
+       x="18.520834"
+       y="47.625"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
+       x="45.578384"
+       y="151.63672"
+       id="text853-2"><tspan
+         sodipodi:role="line"
+         x="45.578384"
+         y="151.63672"
+         style="text-align:center;text-anchor:middle;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
+         id="tspan978-0">nwxutils</tspan></text>
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#d45500;stroke-width:0.8;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:45.3543"
+       id="rect895-5"
+       width="30.427082"
+       height="11.906257"
+       x="30.427084"
+       y="143.93323"
+       ry="1.6840529" />
+    <text
+       xml:space="preserve"
+       id="text1004"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1006);" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 68.791666,84.666666 v 1.5875 l 7.937501,10e-7 -1.322917,1.322917 4.233333,-2.116667 -4.233334,-2.116668 1.322918,1.322918 z"
+       id="path1018"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 68.527082,118.26875 v 1.5875 h 7.937501 l -1.322917,1.32292 4.233334,-2.11667 -4.233335,-2.11666 1.322918,1.32291 z"
+       id="path1018-3"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 105.83333,95.25 h -1.5875 v 7.9375 l -1.32292,-1.32292 2.11667,4.23333 2.11666,-4.23333 -1.32291,1.32292 z"
+       id="path1018-3-0"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 105.83333,132.29167 h -1.5875 v 7.9375 l -1.32292,-1.32292 2.11667,4.23333 2.11666,-4.23333 -1.32291,1.32292 z"
+       id="path1018-3-0-5"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
+</svg>
