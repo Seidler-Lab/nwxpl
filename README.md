@@ -6,7 +6,7 @@ This pipeline can run 5 separate NWChem calculations using one job per structure
 
 The NWChem calculations are the following (in order):
 
-1. Geomtry Optimization
+1. Geometry Optimization
 2. Ground State Calculation
 3. Valence-to-Core X-ray Emission Spectroscopy (VtC-XES)
 4. X-ray Absoprtion Near-Edge Fine Structure (XANES)
@@ -14,7 +14,7 @@ The NWChem calculations are the following (in order):
 
 ## How to use the pipeline
 
-1. Clone this repo onto your cluster of choice
+1. Clone this repo onto your cluster of choice.
 2. The `template` directory has template NWChem input files, filestrcutures, and a template job or sbatch file.
 3. Modify the basis of your chosen element using the `basisfiles` directory.
 4. Move all your structure files (in the form of `.xyz` files) to `ScriptedCalculations/input_xyz/`

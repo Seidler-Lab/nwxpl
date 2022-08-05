@@ -47,8 +47,12 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores, test_phase,
         highpath = geomdir / '{}.xyz'.format(compoundname)
     else:
         highestxyz = find_highest_number_xyz_file(geomdir / 'xyzfiles')
-        highpath = geomdir / 'xyzfiles' / '{}-{:03}.xyz'.format(compoundname,
-                                                                highestxyz)
+        if highestxyz == 0:
+            highpath = geomdir / '{}.xyz'.format(compoundname)
+        else:
+            highpath = geomdir / 'xyzfiles' / '{}-{:03}.xyz'.format(compoundname,
+                                                                    highestxyz)
+
     optimizedfilepath = gnddir / (compoundname + '_optimized.xyz')
     shutil.copyfile(highpath, optimizedfilepath)
     centeredfile = center_xyz(optimizedfilepath, 0)
@@ -184,12 +188,13 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
     compounddir = workdir / compoundname
 
     # Run geometry optimization
+    """
     exitcode = run_geometry_optimization(compoundname, compounddir,
                                          numcores, test_phase,
                                          mpi_path=mpi_path)
     assert exitcode == 0, "NWChem call on geometry optimization step " + \
                           "returned exitcode {}!".format(exitcode)
-
+    """
     # Run ground state calculation
     exitcode = run_gnd_state_calculation(compoundname, compounddir,
                                          numcores, test_phase, atom,
@@ -205,12 +210,13 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
                           "returned exitcode {}!".format(exitcode)
 
     # Run XES calculation
+    """
     exitcode = run_xes_calculation(compoundname, compounddir,
                                    numcores, test_phase, atom,
                                    mpi_path=mpi_path)
     assert exitcode == 0, "NWChem call on xes calculation step " + \
                           "returned exitcode {}!".format(exitcode)
-
+    """
     # Run ESP
     if run_esp:
         run_esp_calculation(compoundname, compounddir, outdir, numcores,
