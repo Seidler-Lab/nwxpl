@@ -62,7 +62,7 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores, test_phase,
         # replace heavier atoms with ECP
         add_ecp(gnddir / 'input.nw', heavy_atoms)
     # Set and finalize template vals in input.nw
-    geometry_file = centeredfile.name
+    geometry_file = gnddir / (compoundname + '_optimized_centered.xyz') # centeredfile.name
     set_template_vars(gnddir / 'input.nw', [('GEOMETRY_FILE', geometry_file)])
     finalize_template_vars(gnddir / 'input.nw')
     if test_phase:
