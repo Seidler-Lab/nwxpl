@@ -142,15 +142,18 @@ def basic_multiplicity_from_atoms(geometryfile):
 def read_xyz(file):
     """Read XYZ and parse data into lists."""
     with open(file, 'r') as f:
-        lines = f.readlines()
+        #lines = f.readlines()
         atoms = []
         coords = []
-        for l in lines[2:]:  # XYZ files must have two header rows
-            split = l.split()
-            atoms.append(split[0])
-            coords.append([float(x) for x in split[1:]])
+        #for l in lines[2:]:  # XYZ files must have two header rows
+        for i, l in enumerate(f):
+            if i >= 2:
+                split = l.split()
+                atoms.append(split[0])
+                coords.append([float(x) for x in split[1:]])
         assert len(atoms) == len(coords), 'Something went wrong, \
             len of atoms doesnt equal length of coords'
+        f.close()
     return atoms, coords
 
 
