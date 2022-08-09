@@ -2,7 +2,7 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 36
 #SBATCH -t [TIME=5:00:00]
-#SBATCH -A emsle60173
+#SBATCH -A emsls51190
 #SBATCH -o [JOB_NAME=].out
 #SBATCH -e [JOB_NAME=].err
 #SBATCH -J [JOB_NAME=]
@@ -11,9 +11,10 @@
 #SBATCH --mail-user [EMAIL=]
 
 # Print out some information for refund purposes
+## is A = emsle60173
 ############################################################################
 
-# echo "refund: UserID = tete629"
+echo "refund: UserID = tete629"
 # echo "refund: SLURM Job ID = ${SLURM_JOBID}"
 # echo "refund: Number of nodes          = 1"
 # echo "refund: Number of cores per node = 36"
