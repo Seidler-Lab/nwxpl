@@ -10,7 +10,7 @@ title "14778"
 #memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load 14778_optimized_centered.xyz
+  load C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\14778\gndstate\14778_optimized_centered.xyz
 end
 
 #----------------------------------------------------------------------
