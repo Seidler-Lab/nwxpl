@@ -188,13 +188,13 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
     compounddir = workdir / compoundname
 
     # Run geometry optimization
-    
+    """
     exitcode = run_geometry_optimization(compoundname, compounddir,
                                          numcores, test_phase,
                                          mpi_path=mpi_path)
     assert exitcode == 0, "NWChem call on geometry optimization step " + \
                           "returned exitcode {}!".format(exitcode)
-    
+    """
     # Run ground state calculation
     exitcode = run_gnd_state_calculation(compoundname, compounddir,
                                          numcores, test_phase, atom,
