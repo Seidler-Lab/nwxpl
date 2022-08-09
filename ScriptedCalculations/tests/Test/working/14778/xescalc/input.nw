@@ -1,19 +1,19 @@
 echo
 
-scratch_dir C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch
-permanent_dir 
+scratch_dir [SCRATCH_DIR=C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch]
+permanent_dir [PERMANENT_DIR=]
 
-start 10112
+start [COMPOUND=14778]
 
-title "10112"
+title "[COMPOUND=14778]"
 
 memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load 10112_optimized_centered.xyz
+  load [GEOMETRY_FILE=]
 end
 
-#----------------------------------------------------------------------
+[BASIS_DATA=#----------------------------------------------------------------------
 # Basis Set Exchange
 # Version v0.9
 # https://www.basissetexchange.org
@@ -94,21 +94,28 @@ Ca    F
 Ca    G
       1.3950090              1.0000000
 END
+]
 
-
-charge 0
+charge [CHARGE=0]
 
 dft
   xc pbe0
+  odft
+  mult [MULT=1]
   print "final vectors analysis"
   maxiter 500
   mulliken
   direct
+  max_ovl
+  vectors input [ATOM=Ca].movecs swap beta 1 [HIGHEST_OCCUPIED_BETA=] output [ATOM=Ca]-swap.movecs
 end
 
+task dft
+
 tddft
-	ecut 42
-	nroots 65
-	notriplet
+  notriplet
+  cis
+  nroots [HIGHEST_OCCUPIED_BETA=]
 end
+
 task tddft

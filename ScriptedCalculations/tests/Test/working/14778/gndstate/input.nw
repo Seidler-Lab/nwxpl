@@ -3,14 +3,14 @@ echo
 scratch_dir C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch
 permanent_dir 
 
-start 10112
+start 14778
 
-title "10112"
+title "14778"
 
 #memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load 10112_optimized_centered.xyz
+  load 14778_optimized_centered.xyz
 end
 
 #----------------------------------------------------------------------

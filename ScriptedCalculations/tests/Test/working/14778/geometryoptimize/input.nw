@@ -3,14 +3,14 @@ echo
 scratch_dir [SCRATCH_DIR=C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch]
 permanent_dir [PERMANENT_DIR=]
 
-start [COMPOUND=10112]
+start [COMPOUND=14778]
 
-title "[COMPOUND=10112]"
+title "[COMPOUND=14778]"
 
 memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load [COMPOUND=10112].xyz
+  load [COMPOUND=14778].xyz
 end
 
 basis "ao basis" spherical print
@@ -31,7 +31,7 @@ end
 
 driver
   maxiter 500
-  xyz xyzfiles/[COMPOUND=10112]
+  xyz xyzfiles/[COMPOUND=14778]
 end
 
 task dft optimize
