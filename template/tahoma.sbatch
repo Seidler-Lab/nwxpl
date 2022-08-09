@@ -57,10 +57,10 @@ setenv ARMCI_OPENIB_DEVICE mlx5_0
 echo "setenv worked"
 
 setenv MPIRETURN 999
-# ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
+ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
 # mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
-# python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28] [ATOM=]
-# setenv MPIRETURN $?
+python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28] [ATOM=]
+setenv MPIRETURN $?
 
 ############################################################################
 # End of the job script
