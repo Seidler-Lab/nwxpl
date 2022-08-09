@@ -11,7 +11,7 @@
 #SBATCH --mail-user [EMAIL=]
 
 # Print out some information for refund purposes
-## is A = emsle60173
+## Is -A supposed to be emsle60173 ?
 ############################################################################
 
 echo "refund: UserID = tete629"
@@ -55,9 +55,10 @@ setenv NWC_RANKS_PER_DEVICE 0
 setenv ARMCI_OPENIB_DEVICE mlx5_0
 
 echo "setenv worked"
+echo $SLURM_NPROCS
 
 setenv MPIRETURN 999
-ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
+# ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
 # mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
 python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28] [ATOM=]
 setenv MPIRETURN $?
