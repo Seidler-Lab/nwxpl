@@ -43,8 +43,6 @@ module load python/3.8.1
 setenv UCX_LOG_LEVEL WARN
 setenv I_MPI_DEBUG 1
 
-echo "module loading worked"
-
 setenv ARMCI_DEFAULT_SHMMAX 16384
 setenv NWCHEM_BASIS_LIBRARY "/cluster/apps/nwchem/nwchem-master/src/basis/libraries/"
 setenv NWCHEM_NWPW_LIBRARY "/cluster/apps/nwchem/nwchem-master/src/nwpw/libraryps/"
@@ -54,7 +52,7 @@ setenv MKL_NUM_THREADS 1
 setenv NWC_RANKS_PER_DEVICE 0
 setenv ARMCI_OPENIB_DEVICE mlx5_0
 
-echo "setenv worked"
+echo "Starting job"
 echo $SLURM_NPROCS
 
 setenv MPIRETURN 999
@@ -67,7 +65,7 @@ setenv MPIRETURN $?
 # End of the job script
 ############################################################################
 
-echo "completed job"
+echo "Completed job"
 
 exit $MPIRETURN
 
