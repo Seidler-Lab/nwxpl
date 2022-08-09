@@ -269,7 +269,7 @@ if __name__ == '__main__':
     MPI_PATH = Path(args.mpi_path).resolve()
     CORES = args.cores
     ATOM = args.atom
-    test_phase = args.test
+    test_phase = True #args.test
 
     run_esp = False  # todo -- make this better
 
