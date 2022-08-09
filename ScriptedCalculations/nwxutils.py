@@ -147,7 +147,7 @@ def read_xyz(file):
         lines = f.readlines()
         atoms = []
         coords = []
-        for l in lines[2:]:  # XYZ files must have two header rows
+        for l in lines: #[2:]:  # XYZ files must have two header rows
             split = l.split()
             atoms.append(split[0])
             coords.append([float(x) for x in split[1:]])
