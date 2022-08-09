@@ -43,13 +43,15 @@ def run_nwchem_job(jobfile, outfile, cores, mpi_path=None):
     #                   capture_output=True)
 
     # Run on Tahoma using:
+    completedjob = run(['mpirun', '-h'])
 
+    """
     completedjob = run(['mpirun', '-n', str(cores), '-ppn', str(cores),
                         '/tahoma/emsls51190/nwchem-exec/nwchem-master',
                         str(jobfile.name)],
                        cwd=jobfile.parent,
                        capture_output=True)
-
+    """
     with open(outfile, 'wb') as f:
         f.write(completedjob.stdout)
     return completedjob.returncode
