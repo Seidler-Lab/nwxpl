@@ -58,7 +58,7 @@ echo $SLURM_NPROCS
 setenv MPIRETURN 999
 # ldd  /tahoma/emsls51190/nwchem-exec/nwchem-master
 # mpirun -n $SLURM_NPROCS  -ppn 36  /tahoma/emsls51190/nwchem-exec/nwchem-master input.nw
-python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=28] [ATOM=]
+python [PIPELINE_SCRIPT=] [COMPOUND_NAME=] [WORK_DIR=] [OUT_DIR=] [CORES=36] [ATOM=]
 setenv MPIRETURN $?
 
 ############################################################################
