@@ -54,7 +54,7 @@ def run_nwchem_job(jobfile, outfile, cores, mpi_path=None):
     """
     with open(outfile, 'wb') as f:
         #f.write(completedjob.stdout)
-        f.write(completedjob)
+        f.close()
     return 0 #completedjob.returncode
 
 
