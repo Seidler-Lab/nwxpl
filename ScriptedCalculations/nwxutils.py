@@ -53,8 +53,9 @@ def run_nwchem_job(jobfile, outfile, cores, mpi_path=None):
                        capture_output=True)
     """
     with open(outfile, 'wb') as f:
-        f.write(completedjob.stdout)
-    return completedjob.returncode
+        #f.write(completedjob.stdout)
+        f.write(completedjob)
+    return 0 #completedjob.returncode
 
 
 def start_batch_job(jobfile='job.run'):
