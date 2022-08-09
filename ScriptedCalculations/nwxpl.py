@@ -1,11 +1,11 @@
+#! /usr/bin/env python
+
 """
 Run Structures through pipeline linearly.
 
 Creates one job per structure.
 To see more options use '-h' flag.
 """
-
-#! /usr/bin/env python
 
 import argparse
 from pathlib import Path
