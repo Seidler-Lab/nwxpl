@@ -50,3 +50,42 @@ Select the element of your calculation and choose a basis set from the list on t
 <p align="center">
 <img src="flowchart.png" alt="flowchart" width="500">
 </p>
+
+## An example file structure
+
+``` 
+│
+└───work
+│   │
+|   |───scratch
+|   |   ...
+|   |  
+│   └───id1
+│   │   │   esp
+│   |   │   geometryoptimize
+|   |   |   gndstate
+│   |   │   xes
+│   │   │   xanes
+│   │   │   job.run
+│   |   │   ...
+│   |
+│   └───id2
+|   |   |   esp
+│   |   │   geometryoptimize
+|   |   |   gndstate
+│   |   │   xes
+│   │   │   xanes
+│   │   │   job.run
+│   |   │   ...
+│   |	...
+|
+└───out
+│   │
+│   | id1.dat
+|   | id2.dat
+│   │ ...
+│   
+└───nwxpl
+│   │
+│   ...
+```
