@@ -235,11 +235,12 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
                         '-o', (compounddir / 'xanes' / 'xanes.dat').resolve()])
 
         # Extract dat from XES output
+        """
         print("Extracting XES spectrum for {}.".format(compoundname))
         subprocess.run(['python', 'ToolScripts/nw_spectrum_xes.py', '-x', '-i',
                         (compounddir / 'xescalc' / 'output.out').resolve(),
                         '-o', (compounddir / 'xescalc' / 'xes.dat').resolve()])
-
+        """
         # Collect dats
         print("Moving spectrum dat files to output directory.")
         shutil.copy(compounddir / 'xanes' / 'xanes.dat',
