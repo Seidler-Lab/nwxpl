@@ -245,8 +245,10 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
         print("Moving spectrum dat files to output directory.")
         shutil.copy(compounddir / 'xanes' / 'xanes.dat',
                     outdir / '{}_xanes.dat'.format(compoundname))
+        """
         shutil.copy(compounddir / 'xescalc' / 'xes.dat',
                     outdir / '{}_xes.dat'.format(compoundname))
+        """
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run a single structure ' +
