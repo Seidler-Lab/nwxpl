@@ -1,4 +1,6 @@
-# NWXPL (**NW**chem **X**-ray calculation **P**ipe**L**ine)
+# Charles Branch, NWXPL (**NW**chem **X**-ray calculation **P**ipe**L**ine)
+
+This pipeline has been edited to work on the macchiato cluster for a more updated version of NWChem.
 
 This pipeline can run 5 separate NWChem calculations using one job per structure, all of which is managed by python scipts.
 
