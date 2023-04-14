@@ -42,6 +42,12 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
         shutil.rmtree(scratchdir)
     shutil.os.mkdir(scratchdir)
 
+    if outdir.exists():
+        shutil.rmtree(outdir)
+    shutil.os.mkdir(outdir)
+
+
+
     # Get initial multiplicity
     mult = basic_multiplicity_from_atoms(structfilename)
 

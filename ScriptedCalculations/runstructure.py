@@ -137,7 +137,8 @@ def run_xes_calculation(compoundname, compounddir, numcores, test_phase,
         add_ecp(xesdir / 'input.nw', heavy_atoms)
     # Increase charge by 1
     charge = int(get_template_var(xesdir / 'input.nw', 'CHARGE')) + 1
-    mult = basic_multiplicity_from_atoms(xesdir / centeredfile.name)
+    #mult = basic_multiplicity_from_atoms(xesdir / centeredfile.name)
+    mult = 2 # With corehole, we have 2 spin states
     geometry_file = centeredfile.name
     set_template_vars(xesdir / 'input.nw', [('GEOMETRY_FILE', geometry_file),
                                             ('CHARGE', charge),
@@ -184,7 +185,7 @@ def run_esp_calculation(compoundname, workdir, outdir, numcores, test_phase,
         pass
     else:
         # Call nwchem for gnd state calculation
-        os.chdir(xspdir)
+        os.chdir(espdir)
         result = subprocess.run(['python', 'edit_input_geometry.py'])
         os.chdir(original_dir)
 
@@ -228,13 +229,13 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
                           "returned exitcode {}!".format(exitcode)
 
     # Run XES calculation
-    """
+    
     exitcode = run_xes_calculation(compoundname, compounddir,
                                    numcores, test_phase, atom,
                                    mpi_path=mpi_path)
     assert exitcode == 0, "NWChem call on xes calculation step " + \
                           "returned exitcode {}!".format(exitcode)
-    """
+    
     # Run ESP
     if run_esp:
         run_esp_calculation(compoundname, compounddir, outdir, numcores,
@@ -253,20 +254,16 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
                         '-o', (compounddir / 'xanes' / 'xanes.dat').resolve()])
 
         # Extract dat from XES output
-        """
         print("Extracting XES spectrum for {}.".format(compoundname))
         subprocess.run(['python', 'ToolScripts/nw_spectrum_xes.py', '-x', '-i',
                         (compounddir / 'xescalc' / 'output.out').resolve(),
                         '-o', (compounddir / 'xescalc' / 'xes.dat').resolve()])
-        """
         # Collect dats
         print("Moving spectrum dat files to output directory.")
         shutil.copy(compounddir / 'xanes' / 'xanes.dat',
                     outdir / '{}_xanes.dat'.format(compoundname))
-        """
         shutil.copy(compounddir / 'xescalc' / 'xes.dat',
                     outdir / '{}_xes.dat'.format(compoundname))
-        """
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run a single structure ' +

@@ -1,19 +1,20 @@
 echo
 
-scratch_dir [SCRATCH_DIR=/home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch]
-permanent_dir [PERMANENT_DIR=]
+scratch_dir /home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch
+permanent_dir 
 
-start [COMPOUND=14778]
+start 14778
 
-title "[COMPOUND=14778]"
+title "14778"
 
 memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load [GEOMETRY_FILE=]
+Ca 0.00000 0.00000 0.00000
+O 2.03614 0.00000 -0.00000
 end
 
-[BASIS_DATA=#----------------------------------------------------------------------
+#----------------------------------------------------------------------
 # Basis Set Exchange
 # Version v0.9
 # https://www.basissetexchange.org
@@ -94,9 +95,9 @@ Ca    F
 Ca    G
       1.3950090              1.0000000
 END
-]
 
-charge [CHARGE=0]
+
+charge 0
 
 dft
   xc pbe0
@@ -107,7 +108,7 @@ dft
 end
 
 tddft
-	ecut [ECUT=]
+	ecut -144.6
 	nroots 65
 	notriplet
 end

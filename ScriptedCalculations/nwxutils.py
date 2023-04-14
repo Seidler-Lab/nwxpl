@@ -1,3 +1,7 @@
+# Created by Samantha Tetef
+# Last edited by Charles Cardot
+# Updated on: 04/14/2023
+
 """Useful functions for use in pipeline scripts."""
 
 import re
@@ -220,7 +224,8 @@ def get_highest_occupied_beta_movec(infile):
     """Retrieve highest occupied beta movec from groundstate calc output."""
     with open(infile, 'r') as f:
         content = f.read()
-        borbitalsindex = content.index('DFT Final Beta Molec Orbital Analysis')
+        #borbitalsindex = content.index('DFT Final Beta Molec Orbital Analysis') # Old
+        borbitalsindex = content.index('DFT Final Beta Molecular Orbital Analysis') # New
         betaorbitals = content[borbitalsindex:]
         occ0index = betaorbitals.index('Occ=0')
         f.seek(borbitalsindex + occ0index)
