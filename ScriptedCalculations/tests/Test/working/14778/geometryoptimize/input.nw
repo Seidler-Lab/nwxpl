@@ -1,27 +1,28 @@
 echo
 
-scratch_dir [SCRATCH_DIR=C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch]
-permanent_dir [PERMANENT_DIR=]
+scratch_dir /home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch
+permanent_dir 
 
-start [COMPOUND=14778]
+start 14778
 
-title "[COMPOUND=14778]"
+title "14778"
 
 memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load [COMPOUND=14778].xyz
+Ca 15.96880 -11.12500 0.00000
+O 17.46880 -11.12500 0.00000
 end
 
 basis "ao basis" spherical print
    * library 6-31G*
 end
 
-charge [CHARGE=0]
+charge 0
 
 dft
   xc b3lyp
-  mult [MULT=1]
+  mult 1
   odft
   maxiter 500
   print "final vectors analysis"
@@ -31,7 +32,7 @@ end
 
 driver
   maxiter 500
-  xyz xyzfiles/[COMPOUND=14778]
+  xyz xyzfiles/14778
 end
 
 task dft optimize

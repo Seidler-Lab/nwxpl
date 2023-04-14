@@ -43,10 +43,14 @@ def run_nwchem_job(jobfile, outfile, cores, mpi_path=None):
     #                   capture_output=True)
 
     # Run on Tahoma using:
-    #run(['mpirun', '-h'])
-    completedjob = run(['mpirun', '-n', str(cores), '-ppn', str(cores),
-                        '/tahoma/emsls51190/nwchem-exec/nwchem-master',
-                        str(jobfile.name)],
+    # completedjob = run(['mpirun', '-n', str(cores), '-ppn', str(cores),
+    #                    '/tahoma/emsls51190/nwchem-exec/nwchem-master',
+    #                    str(jobfile.name)],
+    #                   cwd=jobfile.parent,
+    #                   capture_output=True)
+
+    # Run on macchiato using:
+    completedjob = run(['nwchem', str(jobfile.name)],
                        cwd=jobfile.parent,
                        capture_output=True)
 
@@ -55,10 +59,12 @@ def run_nwchem_job(jobfile, outfile, cores, mpi_path=None):
         f.close()
     return completedjob.returncode
 
-
 def start_batch_job(jobfile='job.run'):
     """Queue a job and return error code of queueing call."""
-    return subprocess.call(['sbatch', jobfile])
+    #return subprocess.call(['sbatch', jobfile])
+    #return subprocess.call(['qsub', jobfile])
+    subprocess.call(['chmod', '+rwx', jobfile])
+    return subprocess.call([jobfile])
 
 
 def replace_text_in_file(infile, pairs):

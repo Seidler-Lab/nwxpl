@@ -1,19 +1,19 @@
 echo
 
-scratch_dir C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch
-permanent_dir 
+scratch_dir [SCRATCH_DIR=/home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch]
+permanent_dir [PERMANENT_DIR=]
 
-start 14778
+start [COMPOUND=14778]
 
-title "14778"
+title "[COMPOUND=14778]"
 
 memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load 14778_optimized_centered.xyz
+  load [GEOMETRY_FILE=]
 end
 
-#----------------------------------------------------------------------
+[BASIS_DATA=#----------------------------------------------------------------------
 # Basis Set Exchange
 # Version v0.9
 # https://www.basissetexchange.org
@@ -94,9 +94,9 @@ Ca    F
 Ca    G
       1.3950090              1.0000000
 END
+]
 
-
-charge 0
+charge [CHARGE=0]
 
 dft
   xc pbe0
@@ -107,7 +107,7 @@ dft
 end
 
 tddft
-	ecut 42
+	ecut [ECUT=]
 	nroots 65
 	notriplet
 end

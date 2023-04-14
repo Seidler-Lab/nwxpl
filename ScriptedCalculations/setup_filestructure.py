@@ -38,6 +38,10 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     shutil.copytree(PL_ROOT / 'template', compounddir)  # Copy template dirs
     shutil.copy(structfilename, compounddir / 'geometryoptimize/')  # Copy XYZ
 
+    if scratchdir.exists():
+        shutil.rmtree(scratchdir)
+    shutil.os.mkdir(scratchdir)
+
     # Get initial multiplicity
     mult = basic_multiplicity_from_atoms(structfilename)
 
@@ -59,7 +63,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
     pipeline_script = current_file_path.replace('setup_filestructure.py',
                                                 'runstructure.py')
     # mpi_path = str(Path(env_config['NWXPL_MPI_PATH'])/'lib')
-    set_template_vars(compounddir / 'tahoma.sbatch',
+    set_template_vars(compounddir / 'run.sh',
                       [('JOB_NAME', compoundname),
                        ('PIPELINE_SCRIPT', repr(pipeline_script)),
                        ('COMPOUND_NAME', compoundname),
@@ -69,7 +73,8 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
                        ('EMAIL', env_config['EMAIL']),
                        ('ATOM', atom)])
     # finalize_template_vars(compounddir/'job.run')
-    finalize_template_vars(compounddir / 'tahoma.sbatch')
+    # finalize_template_vars(compounddir / 'tahoma.sbatch')
+    finalize_template_vars(compounddir / 'run.sh')
 
     if run_esp:
         espdir = compounddir / 'esp'

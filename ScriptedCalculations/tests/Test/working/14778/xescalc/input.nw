@@ -1,6 +1,6 @@
 echo
 
-scratch_dir [SCRATCH_DIR=C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch]
+scratch_dir [SCRATCH_DIR=/home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch]
 permanent_dir [PERMANENT_DIR=]
 
 start [COMPOUND=14778]

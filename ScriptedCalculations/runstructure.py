@@ -2,6 +2,7 @@
 
 #!/usr/bin/env python
 
+import os
 import shutil
 from pathlib import Path
 import argparse
@@ -20,6 +21,7 @@ from nwxutils import get_highest_occupied_beta_movec
 from nwxutils import basic_multiplicity_from_atoms
 from nwxutils import get_template_var
 
+original_dir = os.getcwd()
 
 def run_geometry_optimization(compoundname, compounddir, numcores, test_phase,
                               mpi_path=None):
@@ -32,6 +34,9 @@ def run_geometry_optimization(compoundname, compounddir, numcores, test_phase,
     if test_phase:
         return 0
     else:
+        os.chdir(geomdir)
+        result = subprocess.run(['python', 'edit_input_geometry.py'])
+        os.chdir(original_dir)
         return run_nwchem_job(geomdir / 'input.nw', geomdir / 'output.out',
                               numcores, mpi_path=mpi_path)
 
@@ -69,6 +74,9 @@ def run_gnd_state_calculation(compoundname, compounddir, numcores, test_phase,
         return 0
     else:
         # Call nwchem for gnd state calculation
+        os.chdir(gnddir)
+        result = subprocess.run(['python', 'edit_input_geometry.py'])
+        os.chdir(original_dir)
         return run_nwchem_job(gnddir / 'input.nw', gnddir / 'output.out',
                               numcores, mpi_path=mpi_path)
 
@@ -100,6 +108,9 @@ def run_xanes_calculation(compoundname, compounddir, numcores, test_phase,
         return 0
     else:
         # Run nwchem XANES calculation and write output to file
+        os.chdir(xanesdir)
+        result = subprocess.run(['python', 'edit_input_geometry.py'])
+        os.chdir(original_dir)
         return run_nwchem_job(xanesdir / 'input.nw', xanesdir / 'output.out',
                               numcores, mpi_path=mpi_path)
 
@@ -138,6 +149,9 @@ def run_xes_calculation(compoundname, compounddir, numcores, test_phase,
         return 0
     else:
         # Run nwchem for xes calc
+        os.chdir(xesdir)
+        result = subprocess.run(['python', 'edit_input_geometry.py'])
+        os.chdir(original_dir)
         return run_nwchem_job(xesdir / 'input.nw', xesdir / 'output.out',
                               numcores, mpi_path=mpi_path)
 
@@ -170,6 +184,10 @@ def run_esp_calculation(compoundname, workdir, outdir, numcores, test_phase,
         pass
     else:
         # Call nwchem for gnd state calculation
+        os.chdir(xspdir)
+        result = subprocess.run(['python', 'edit_input_geometry.py'])
+        os.chdir(original_dir)
+
         exitcode = run_nwchem_job(espdir / 'input.nw', espdir / 'output.out',
                                   numcores, mpi_path=mpi_path)
         assert exitcode == 0, "NWChem call on esp charge calculation " + \
@@ -188,13 +206,13 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
     compounddir = workdir / compoundname
 
     # Run geometry optimization
-    """
+    
     exitcode = run_geometry_optimization(compoundname, compounddir,
                                          numcores, test_phase,
                                          mpi_path=mpi_path)
     assert exitcode == 0, "NWChem call on geometry optimization step " + \
                           "returned exitcode {}!".format(exitcode)
-    """
+    
     # Run ground state calculation
     exitcode = run_gnd_state_calculation(compoundname, compounddir,
                                          numcores, test_phase, atom,

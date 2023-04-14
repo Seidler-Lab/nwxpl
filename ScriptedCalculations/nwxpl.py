@@ -44,9 +44,12 @@ def run_calculation(structfilename, env_config, basisfilename, workdir,
                             run_esp=run_esp)
     print("Starting job for {}".format(compoundname))
     if test_phase:
+        print("in test phase")
         test_job(jobfile=str(workdir / compoundname / 'tahoma.sbatch'))
     else:
-        start_batch_job(jobfile=str(workdir / compoundname / 'tahoma.sbatch'))
+        #start_batch_job(jobfile=str(workdir / compoundname / 'tahoma.sbatch'))
+        print("in nwxpl.py, trying to run run.sh")
+        start_batch_job(jobfile=str(workdir / compoundname / 'run.sh'))
 
 
 if __name__ == '__main__':
@@ -78,8 +81,9 @@ if __name__ == '__main__':
                         type=int, default=0,
                         help="Specify charge of compound (default 0)")
     parser.add_argument('-t', '--test', action='store', dest='test',
-                        type=bool, default=False,
+                        type=int, default=0,
                         help="Specify whether in testing phase or not.")
+
 
     args = parser.parse_args()
     LIST_FILENAME = Path(args.listname).resolve()
@@ -91,6 +95,11 @@ if __name__ == '__main__':
     CHARGE = args.charge
     test_phase = args.test
 
+    if test_phase == 0:
+        test_phase = False
+    else:
+        test_phase = True
+    
     run_esp = False
 
     # Check basis file exists if specified

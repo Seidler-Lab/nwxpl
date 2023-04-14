@@ -1,6 +1,6 @@
 echo
 
-scratch_dir C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\scratch
+scratch_dir /home/ccardot3/nwchem/nwxpl/ScriptedCalculations/tests/Test/working/scratch
 permanent_dir 
 
 start 14778
@@ -10,7 +10,8 @@ title "14778"
 #memory 7500 mb noverify
 
 geometry units angstrom noautosym nocenter noautoz
-  load C:\Users\saman\Desktop\Research\P ML\nwxpl\ScriptedCalculations\tests\Test\working\14778\gndstate\14778_optimized_centered.xyz
+Ca 0.00000 0.00000 0.00000
+O 2.03614 0.00000 -0.00000
 end
 
 #----------------------------------------------------------------------
