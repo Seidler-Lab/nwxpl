@@ -2,7 +2,7 @@
 
 This pipeline has been edited to work on the macchiato cluster for a more updated version of NWChem.
 
-This pipeline can run 5 separate NWChem calculations using one job per structure, all of which is managed by python scipts.
+This pipeline is set up to run 4-5 separate NWChem calculations using one job per structure, all of which is managed by python scipts.
 
 ## Pipeline capabilities
 
