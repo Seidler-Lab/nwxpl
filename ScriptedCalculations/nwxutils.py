@@ -128,9 +128,9 @@ def finalize_template_vars(tfile):
     with open(tfile) as f:
         data = f.read()
     # Search and replace var tags starting at end of file to avoid index errors
-    tvars = list(re.finditer('\[([^]]+)=([^]]*)\]', data))
+    tvars = list(re.finditer('\[(?:[A-Z0-9_]+)=([^\]]*)\]', data))
     for tvar in reversed(tvars):
-        val = tvar.groups()[1]
+        val = tvar.group(1)
         data = data[:tvar.start()] + val + data[tvar.end():]
     with open(tfile, 'w') as f:
         f.write(data)
@@ -263,20 +263,27 @@ def add_ecp(infile, heavy_atoms, ecp='"Stuttgart RLC ECP"'):
         filedata = f.read()
 
     # add exception line
-    filedata = re.sub("except [COMPOUND=]",
-                      "except [COMPOUND=] {}".format(' '.join(heavy_atoms)),
+    filedata = re.sub(r"except\s([A-Z][a-z]?)",
+                      r"except \1 {}".format(' '.join(heavy_atoms)),
                       filedata)
 
     # add basis library substitution
     for atom in heavy_atoms:
-        filedata = re.sub("# Sapporo", "{} library {}\n# Sapporo".format(atom,
-                                                                         ecp),
+        filedata = re.sub(r"#BASIS SET\s*(.*?)",
+                          r"{} library {}\n#BASIS SET\1".format(atom, ecp),
                           filedata)
 
     # add ecp block
     ecp_block_template = 'ecp\nend\n'
-    filedata = re.sub("task dft",
-                      '{}\ntask dft'.format(ecp_block_template), filedata)
+    if "task dft" in filedata:
+        filedata = re.sub("task dft",
+                          '{}\ntask dft'.format(ecp_block_template), filedata)
+    elif "task tddft" in filedata:
+        filedata = re.sub("task tddft",
+                          '{}\ntask tddft'.format(ecp_block_template), filedata)
+    else:
+        print("WARNING: failed to find place to put ecp block")
+        return
 
     # make ECP block sub here
     for atom in heavy_atoms:

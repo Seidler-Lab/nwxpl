@@ -158,7 +158,7 @@ task dft
 
     hostname        = macchiato.phys.washington.edu
     program         = nwchem
-    date            = Fri Apr 14 18:21:11 2023
+    date            = Tue Apr 25 12:41:21 2023
 
     compiled        = Thu_Mar_23_08:55:53_2023
     source          = /home/conda/feedstock_root/build_artifacts/nwchem_1679552606056/work
@@ -178,10 +178,10 @@ task dft
            Memory information
            ------------------
 
-    heap     =   26214396 doubles =    200.0 Mbytes
-    stack    =   26214401 doubles =    200.0 Mbytes
+    heap     =   26214394 doubles =    200.0 Mbytes
+    stack    =   26214399 doubles =    200.0 Mbytes
     global   =   52428800 doubles =    400.0 Mbytes (distinct from heap & stack)
-    total    =  104857597 doubles =    800.0 Mbytes
+    total    =  104857593 doubles =    800.0 Mbytes
     verify   = yes
     hardfail = no 
 
@@ -508,28 +508,28 @@ task dft
  ---------------- ----- ----------------- --------- --------- ---------  ------
  d= 0,ls=0.0,diis     1   -752.1273307102 -7.94D+02  1.73D-02  6.85D-01     2.2
                                                      1.73D-02  6.85D-01
- d= 0,ls=0.0,diis     2   -743.9824170837  8.14D+00  1.70D-02  4.84D+00     3.7
+ d= 0,ls=0.0,diis     2   -743.9824170837  8.14D+00  1.70D-02  4.84D+00     3.8
                                                      1.70D-02  4.84D+00
  d= 0,ls=0.0,diis     3   -752.3287451352 -8.35D+00  1.76D-03  2.90D-01     5.3
                                                      1.76D-03  2.90D-01
  d= 0,ls=0.0,diis     4   -752.4630690168 -1.34D-01  5.31D-03  6.67D-02     6.8
                                                      5.31D-03  6.67D-02
- d= 0,ls=0.0,diis     5   -752.3514081033  1.12D-01  1.94D-03  3.34D-01     8.3
+ d= 0,ls=0.0,diis     5   -752.3514081033  1.12D-01  1.94D-03  3.34D-01     8.4
                                                      1.94D-03  3.34D-01
  d= 0,ls=0.0,diis     6   -752.4849176047 -1.34D-01  7.77D-04  5.02D-02     9.9
                                                      7.77D-04  5.02D-02
   Resetting Diis
  d= 0,ls=0.0,diis     7   -752.5066877209 -2.18D-02  2.20D-04  3.42D-03    11.4
                                                      2.20D-04  3.42D-03
- d= 0,ls=0.0,diis     8   -752.5081114662 -1.42D-03  5.96D-04  4.48D-04    13.0
+ d= 0,ls=0.0,diis     8   -752.5081114662 -1.42D-03  5.96D-04  4.48D-04    13.1
                                                      5.96D-04  4.48D-04
- d= 0,ls=0.0,diis     9   -752.5039545289  4.16D-03  4.88D-04  9.59D-03    14.6
+ d= 0,ls=0.0,diis     9   -752.5039545289  4.16D-03  4.88D-04  9.59D-03    14.7
                                                      4.88D-04  9.59D-03
- d= 0,ls=0.0,diis    10   -752.5083215428 -4.37D-03  1.37D-05  3.97D-06    16.2
+ d= 0,ls=0.0,diis    10   -752.5083215428 -4.37D-03  1.37D-05  3.97D-06    16.3
                                                      1.37D-05  3.97D-06
- d= 0,ls=0.0,diis    11   -752.5083236400 -2.10D-06  4.04D-06  9.97D-08    17.8
+ d= 0,ls=0.0,diis    11   -752.5083236400 -2.10D-06  4.04D-06  9.97D-08    17.9
                                                      4.04D-06  9.97D-08
- d= 0,ls=0.0,diis    12   -752.5083236736 -3.36D-08  1.87D-06  8.35D-08    19.4
+ d= 0,ls=0.0,diis    12   -752.5083236736 -3.36D-08  1.87D-06  8.35D-08    19.5
                                                      1.87D-06  8.35D-08
 
 
@@ -2335,7 +2335,7 @@ task dft
      2   0 0 2    -14.220538     -7.110269     -7.110269      0.000000
 
 
- Task  times  cpu:       20.1s     wall:       19.5s
+ Task  times  cpu:       20.0s     wall:       19.6s
 
 
                                 NWChem Input Module
@@ -2348,11 +2348,11 @@ task dft
 
 
 MA_summarize_allocated_blocks: starting scan ...
-heap block 'gridpts', handle 108, address 0x55e01cf304e8:
+heap block 'gridpts', handle 108, address 0x55b8727d7528:
 	type of elements:		double precision
 	number of elements:		33554432
-	address of client space:	0x55e01cf30540
-	index for client space:		8863155
+	address of client space:	0x55b8727d7580
+	index for client space:		10957755
 	total number of bytes:		268435552
 MA_summarize_allocated_blocks: scan completed: 1 heap block, 0 stack blocks
 MA usage statistics:
@@ -2363,7 +2363,7 @@ MA usage statistics:
 	current number of blocks	         1	         0
 	maximum number of blocks	        21	        58
 	current total bytes		 268435552	         0
-	maximum total bytes		 272112896	  42201960
+	maximum total bytes		 272112912	  42201944
 	maximum total K-bytes		    272113	     42202
 	maximum total M-bytes		       273	        43
 
@@ -2421,4 +2421,4 @@ MA usage statistics:
    K. Glaesemann, G. Sandrone, M. Stave, H. Taylor, G. Thomas, J. H. van Lenthe,
                                A. T. Wong, Z. Zhang.
 
- Total times  cpu:       20.2s     wall:       19.5s
+ Total times  cpu:       20.1s     wall:       19.6s

@@ -96,6 +96,7 @@ def run_xanes_calculation(compoundname, compounddir, numcores, test_phase,
         ecut = find_ecut(compounddir / 'gndstate' / 'output.out')
     # check for heavier atoms to replace with ECP
     heavy_atoms = check_for_heavy_atoms(centeredfile, atom)
+
     if ecp_required(heavy_atoms):
         # replace heavier atoms with ECP
         add_ecp(xanesdir / 'input.nw', heavy_atoms)
@@ -215,6 +216,7 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
                           "returned exitcode {}!".format(exitcode)
     
     # Run ground state calculation
+
     exitcode = run_gnd_state_calculation(compoundname, compounddir,
                                          numcores, test_phase, atom,
                                          mpi_path=mpi_path)

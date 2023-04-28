@@ -26,6 +26,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
         basisdata = f.read()
         replace = 'SPHERICAL PRINT\n'
         insert = '* library 6-311G** except {}\n'.format(atom)
+        #insert = '* library 6-311G** except [COMPOUND=]\n'
         basisdata = basisdata.replace('[', '(').replace(']', ')')
         basisdata = basisdata.replace(replace,
                                       '{}{}'.format(replace, insert))

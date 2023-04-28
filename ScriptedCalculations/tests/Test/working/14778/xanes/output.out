@@ -160,7 +160,7 @@ task tddft
 
     hostname        = macchiato.phys.washington.edu
     program         = nwchem
-    date            = Fri Apr 14 18:21:30 2023
+    date            = Tue Apr 25 12:41:40 2023
 
     compiled        = Thu_Mar_23_08:55:53_2023
     source          = /home/conda/feedstock_root/build_artifacts/nwchem_1679552606056/work
@@ -476,7 +476,7 @@ task tddft
  LUMO         =      -0.159759
 
   WARNING: movecs_in_org=atomic not equal to movecs_in=./14778.movecs
-   Time after variat. SCF:      0.7
+   Time after variat. SCF:      0.6
 
      ---------------------------------------------
       Total Density - Mulliken Population Analysis
@@ -508,10 +508,10 @@ task tddft
   Resetting Diis
  d= 0,ls=0.0,diis     7   -752.5066843768 -2.18D-02  4.40D-04  1.37D-02    10.6
  d= 0,ls=0.0,diis     8   -752.5081114850 -1.43D-03  1.19D-03  1.79D-03    12.1
- d= 0,ls=0.0,diis     9   -752.5039540581  4.16D-03  9.75D-04  3.84D-02    13.6
+ d= 0,ls=0.0,diis     9   -752.5039540581  4.16D-03  9.75D-04  3.84D-02    13.7
  d= 0,ls=0.0,diis    10   -752.5083215891 -4.37D-03  2.74D-05  1.59D-05    15.1
  d= 0,ls=0.0,diis    11   -752.5083236916 -2.10D-06  8.07D-06  3.98D-07    16.6
- d= 0,ls=0.0,diis    12   -752.5083237252 -3.36D-08  3.75D-06  3.34D-07    18.1
+ d= 0,ls=0.0,diis    12   -752.5083237252 -3.36D-08  3.75D-06  3.34D-07    18.2
 
 
          Total DFT energy =     -752.508323725175
@@ -1539,8 +1539,8 @@ task tddft
 
   Iter   NTrls   NConv    DeltaV     DeltaE      Time   
   ----  ------  ------  ---------  ---------  --------- 
-    1     65       0     0.32E+00   0.10+100       28.1
-    2    195      38     0.15E-02   0.23E-02       44.7
+    1     65       0     0.32E+00   0.10+100       28.0
+    2    195      38     0.15E-02   0.23E-02       44.6
     3    227      65     0.98E-04   0.13E-07       21.2
   ----  ------  ------  ---------  ---------  --------- 
   Convergence criterion met
@@ -2427,7 +2427,7 @@ task tddft
 
   stored tddft:energy   -607.11318431858365     
 
- Task  times  cpu:      114.2s     wall:      114.1s
+ Task  times  cpu:      114.1s     wall:      114.0s
 
 
                                 NWChem Input Module
@@ -2440,11 +2440,11 @@ task tddft
 
 
 MA_summarize_allocated_blocks: starting scan ...
-heap block 'gridpts', handle 108, address 0x5600b82bc468:
+heap block 'gridpts', handle 108, address 0x5591f8fc34a8:
 	type of elements:		double precision
 	number of elements:		97980661
-	address of client space:	0x5600b82bc4c0
-	index for client space:		10035107
+	address of client space:	0x5591f8fc3500
+	index for client space:		11620779
 	total number of bytes:		783845384
 MA_summarize_allocated_blocks: scan completed: 1 heap block, 0 stack blocks
 MA usage statistics:
@@ -2513,4 +2513,4 @@ MA usage statistics:
    K. Glaesemann, G. Sandrone, M. Stave, H. Taylor, G. Thomas, J. H. van Lenthe,
                                A. T. Wong, Z. Zhang.
 
- Total times  cpu:      114.2s     wall:      114.1s
+ Total times  cpu:      114.1s     wall:      114.1s
