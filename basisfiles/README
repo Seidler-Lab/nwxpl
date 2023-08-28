@@ -1,0 +1,5 @@
+The sapporo-qzp-2012 basis sets are the ones recommended to Sam by Niri,
+the naming convention goes basis-set-name.listnumber.nw
+
+so for examples, sapporo-qzp-2012.2.nw corresponds to the basis set
+to be used for 2.list

@@ -15,6 +15,7 @@ def setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
 
     Paths passed to setup must be absolute.
     """
+
     # Root dir of pipeline filestructure (should this be passed?)
     PL_ROOT = Path(__file__).parents[1]
 

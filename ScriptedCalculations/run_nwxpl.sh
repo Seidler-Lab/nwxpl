@@ -9,5 +9,7 @@ echo Out directory: $out
 echo Email: $email
 
 python -c 'import sys; print(f"Using python version {sys.version_info[:]}")'
-python nwxpl.py --inlist 1.list --basefile ../basisfiles/sapporo-qzp-2012.1.nw \
---workdir $work --scratchdir $scratch --outputdir $out --atom O --charge 0
+#python nwxpl.py --inlist 1.list --basefile ../basisfiles/sapporo-qzp-2012.1.nw \
+#--workdir $work --scratchdir $scratch --outputdir $out --atom O --charge 0
+python nwxpl.py --inlist 3.list --basefile ../basisfiles/sapporo-qzp-2012.2.nw \
+--workdir $work --scratchdir $scratch --outputdir $out --atom S --charge 0

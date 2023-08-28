@@ -223,7 +223,6 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
     assert exitcode == 0, "NWChem call on gnd state calculation step " + \
                           "returned exitcode {}!".format(exitcode)
 
-    # Run XANES calculation
     exitcode = run_xanes_calculation(compoundname, compounddir,
                                      numcores, test_phase, atom,
                                      mpi_path=mpi_path)
@@ -267,6 +266,59 @@ def run_structure_through_pipeline(compoundname, workdir, outdir, numcores,
         shutil.copy(compounddir / 'xescalc' / 'xes.dat',
                     outdir / '{}_xes.dat'.format(compoundname))
 
+def run_structure_through_only_XES_pipeline(compoundname, workdir, outdir, numcores,
+                                   atom, run_esp=False, test_phase=False,
+                                   mpi_path=None):
+    """Main calulcuation pipeline."""
+    compounddir = workdir / compoundname
+
+    # Run geometry optimization
+    
+    exitcode = run_geometry_optimization(compoundname, compounddir,
+                                         numcores, test_phase,
+                                         mpi_path=mpi_path)
+    assert exitcode == 0, "NWChem call on geometry optimization step " + \
+                          "returned exitcode {}!".format(exitcode)
+    
+    # Run ground state calculation
+
+    exitcode = run_gnd_state_calculation(compoundname, compounddir,
+                                         numcores, test_phase, atom,
+                                         mpi_path=mpi_path)
+    assert exitcode == 0, "NWChem call on gnd state calculation step " + \
+                          "returned exitcode {}!".format(exitcode)
+
+    # Run XES calculation
+    
+    exitcode = run_xes_calculation(compoundname, compounddir,
+                                   numcores, test_phase, atom,
+                                   mpi_path=mpi_path)
+    assert exitcode == 0, "NWChem call on xes calculation step " + \
+                          "returned exitcode {}!".format(exitcode)
+    
+    # Run ESP
+    if run_esp:
+        run_esp_calculation(compoundname, compounddir, outdir, numcores,
+                            test_phase, atom, mpi_path=mpi_path)
+    else:
+        pass
+
+    if test_phase:
+        pass
+    else:
+        # TODO: make these function calls within python rather than a shell
+        # Extract dat from XES output
+        print("Extracting XES spectrum for {}.".format(compoundname))
+        subprocess.run(['python', 'ToolScripts/nw_spectrum_xes.py', '-x', '-i',
+                        (compounddir / 'xescalc' / 'output.out').resolve(),
+                        '-o', (compounddir / 'xescalc' / 'xes.dat').resolve()])
+        # Collect dats
+        print("Moving spectrum dat files to output directory.")
+        shutil.copy(compounddir / 'xescalc' / 'xes.dat',
+                    outdir / '{}_xes.dat'.format(compoundname))
+
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run a single structure ' +
                                      'through pipeline (run WITHIN JOB)')
@@ -293,6 +345,9 @@ if __name__ == '__main__':
 
     run_esp = False  # todo -- make this better
 
-    run_structure_through_pipeline(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES,
+    #run_structure_through_pipeline(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES,
+    #                               ATOM, run_esp=run_esp, mpi_path=MPI_PATH,
+    #                               test_phase=test_phase)
+    run_structure_through_only_XES_pipeline(COMPOUND_NAME, WORK_DIR, OUT_DIR, CORES,
                                    ATOM, run_esp=run_esp, mpi_path=MPI_PATH,
                                    test_phase=test_phase)

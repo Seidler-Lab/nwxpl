@@ -37,6 +37,7 @@ def run_calculation(structfilename, env_config, basisfilename, workdir,
                     scratchdir, outdir, atom, charge, run_esp=False,
                     test_phase=False):
     """Setup and start a job for a structure. Arguments are Path objects."""
+
     compoundname = structfilename.stem
     print("\nSetting up for {}".format(compoundname))
     setup_job_filestructure(structfilename, env_config, basisfilename, workdir,
